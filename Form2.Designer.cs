@@ -44,6 +44,7 @@
             this.txtKomutSay = new System.Windows.Forms.TextBox();
             this.lblToplam = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSecımKaldır = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -197,6 +198,7 @@
             this.flowRecetePanel.Size = new System.Drawing.Size(260, 545);
             this.flowRecetePanel.TabIndex = 4;
             this.flowRecetePanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.flowRecetePanel_ControlAdded);
+            this.flowRecetePanel.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.flowRecetePanel_ControlRemoved);
             // 
             // anaPanel
             // 
@@ -230,6 +232,7 @@
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.btnSecımKaldır, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.btnSil, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(175, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -238,6 +241,19 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(82, 98);
             this.tableLayoutPanel3.TabIndex = 2;
+            // 
+            // btnSecımKaldır
+            // 
+            this.btnSecımKaldır.BackColor = System.Drawing.Color.LightGreen;
+            this.btnSecımKaldır.FlatAppearance.BorderSize = 0;
+            this.btnSecımKaldır.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSecımKaldır.Location = new System.Drawing.Point(3, 52);
+            this.btnSecımKaldır.Name = "btnSecımKaldır";
+            this.btnSecımKaldır.Size = new System.Drawing.Size(76, 42);
+            this.btnSecımKaldır.TabIndex = 3;
+            this.btnSecımKaldır.Text = "Seçimi Kaldır";
+            this.btnSecımKaldır.UseVisualStyleBackColor = false;
+            this.btnSecımKaldır.Click += new System.EventHandler(this.btnSecımKaldır_Click);
             // 
             // Form2
             // 
@@ -279,5 +295,6 @@
         private System.Windows.Forms.TextBox txtKomutSay;
         private System.Windows.Forms.Label lblToplam;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button btnSecımKaldır;
     }
 }

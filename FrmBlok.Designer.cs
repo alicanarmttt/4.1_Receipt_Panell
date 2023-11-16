@@ -34,6 +34,7 @@
             this.btnEkle = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnUstEkle = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -59,6 +60,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(236)))), ((int)(((byte)(252)))));
+            this.panel1.Controls.Add(this.btnUstEkle);
             this.panel1.Controls.Add(this.btnIptal);
             this.panel1.Controls.Add(this.btnEkle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -71,7 +73,7 @@
             // 
             this.btnIptal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btnIptal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnIptal.Location = new System.Drawing.Point(388, 24);
+            this.btnIptal.Location = new System.Drawing.Point(451, 24);
             this.btnIptal.Name = "btnIptal";
             this.btnIptal.Size = new System.Drawing.Size(154, 57);
             this.btnIptal.TabIndex = 1;
@@ -83,7 +85,7 @@
             // 
             this.btnEkle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btnEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnEkle.Location = new System.Drawing.Point(120, 24);
+            this.btnEkle.Location = new System.Drawing.Point(262, 24);
             this.btnEkle.Name = "btnEkle";
             this.btnEkle.Size = new System.Drawing.Size(154, 57);
             this.btnEkle.TabIndex = 0;
@@ -111,6 +113,19 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(385, 471);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
+            // btnUstEkle
+            // 
+            this.btnUstEkle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnUstEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnUstEkle.Location = new System.Drawing.Point(74, 24);
+            this.btnUstEkle.Name = "btnUstEkle";
+            this.btnUstEkle.Size = new System.Drawing.Size(154, 57);
+            this.btnUstEkle.TabIndex = 2;
+            this.btnUstEkle.Text = "Üste Ekle";
+            this.btnUstEkle.UseVisualStyleBackColor = true;
+            this.btnUstEkle.Visible = false;
+            this.btnUstEkle.Click += new System.EventHandler(this.btnUstEkle_Click);
+            // 
             // FrmBlok
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -135,5 +150,6 @@
         private System.Windows.Forms.Button btnEkle;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnUstEkle;
     }
 }
