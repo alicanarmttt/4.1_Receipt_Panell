@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,12 +15,27 @@ namespace ReceteMain
 {
     public partial class Form2 : Form
     {
-
+        static Form2 _obj;
+        //Instance yaratıyoruz.
+        public static Form2 Instance 
+        {
+            get
+            {
+                if (_obj == null)
+                    _obj = new Form2();
+                return _obj;
+            } 
+        }
         public Form2()
         {
-
+            _obj = this;
             InitializeComponent();
             IsMdiContainer = true;
+            
+        }
+        public FlowLayoutPanel GetFlowRecetePanel()
+        {
+            return flowRecetePanel;
         }
         //Bu metod içine verilen formu anaPanele control olarak ekler.
         public void FormGetir(Form Frm)
@@ -41,7 +57,16 @@ namespace ReceteMain
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-            
+            //Form2 yüklendiğinde flowda hiç button yoksa Komut eklenemesin.
+            if (flowRecetePanel.Controls.OfType<Button>().Count() == 0)
+            {
+                btnKomut.Enabled = false;
+            }
+            else
+            {
+                btnKomut.Enabled = true;
+            }
+
         }
 
 
@@ -103,10 +128,27 @@ namespace ReceteMain
                 case 18:
                 case 19:
                 case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                case 30:
+                case 31:
+                case 32:
+                case 33:
+                case 34:
+                case 35:
                     btn.BackColor = Color.LightGreen;
                     anaPanel.Controls.Clear();
                     KomutControl1 komutControl1 = new KomutControl1(Convert.ToInt32(btn.Tag)); //UserControlü FrmKomut üzerindeki Tag==ID'sine göre çağırıyoruz.
+                    //btnKmtAc.Enabled = true;
                     anaPanel.Controls.Add(komutControl1);
+
                     break;
                 case 48:
                 case 49:
@@ -119,9 +161,7 @@ namespace ReceteMain
                 default:  
                     break;
             }
-            
-
-
+   
         }
      
         private void btnBlok_Click_1(object sender, EventArgs e)
@@ -164,6 +204,19 @@ namespace ReceteMain
             // Form1'i göster
             Form1 form1 = new Form1();
             form1.Show();
+        }
+
+        private void btnKmtAc_Click(object sender, EventArgs e)
+        {
+         
+        }
+        //flowpanele control eklenmeden komut açılmıyor.
+        private void flowRecetePanel_ControlAdded(object sender, ControlEventArgs e)
+        {
+            if (flowRecetePanel.Controls.Count > 0)
+            {
+                btnKomut.Enabled = true;
+            }
         }
     }
 }

@@ -52,7 +52,7 @@ namespace ReceteMain
         private Button CloneButton(Button originalButton)
         {
             Button clonedButton = new Button();
-            clonedButton.Text = originalButton.Text;
+            clonedButton.Text = originalButton.Text.Substring(4);
             clonedButton.Size = originalButton.Size;
             clonedButton.Location = originalButton.Location;
             clonedButton.BackColor = SystemColors.InactiveCaption;
@@ -65,30 +65,31 @@ namespace ReceteMain
             return clonedButton;
         }
 
-       
 
         //Ekle butonuna basınca, seçilen buton varsa oluşturduğun klonlama metoduyla seçilen butonu kopyala
         //Seçilen butonu Form2'yi çalıştırıp flow panele ekle.
         private void btnEkle_Click_1(object sender, EventArgs e)
         {
+            Form2 frm2 = Form2.Instance;
+
             if (secilenButonlar.Count > 0)
             {
                 Button secilenButton = CloneButton(secilenButonlar[0]); // Seçilen butonun kopyasını al
                 Form2 form2 = Application.OpenForms["Form2"] as Form2;
                 form2.AddButtonToFlowLayoutPanel(secilenButton); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
-
             }
-        }
+        }   
 
         private void FrmKomut_Load(object sender, EventArgs e)
         {
-            //başlangıçta her buttonun görünürlüğünü false ayarlıyoruz.
-            foreach (Button button in flowLayoutPanel1.Controls.OfType<Button>())
-            {
-                button.Visible = false;
-            }
-            //Tablodan komutları döngüyle oluşturuyoruz. 
-            SqlCommand kmt1 = new SqlCommand("select * from TblRecete where KomutID<48 and Aktif=1", baglanti);
+            ////Form2 nin instance ını üret.
+            //Form2 frm2 = Form2.Instance;
+            ////Frm2 de flow panelde button yoksa Ekleme tuşu kapansın.
+            //if (frm2.GetFlowRecetePanel().Controls.Count == 0)
+            //{
+            //    btnEkle.Enabled = false;
+            //}
+            SqlCommand kmt1 = new SqlCommand("select * from TblRecete where KomutID<48", baglanti);
             baglanti.Open();
             SqlDataReader rd1 = kmt1.ExecuteReader();
             while(rd1.Read())
@@ -106,6 +107,12 @@ namespace ReceteMain
             }
             baglanti.Close();
 
+            //başlangıçta her buttonun görünürlüğünü false ayarlıyoruz.
+            foreach (Button button in flowLayoutPanel1.Controls.OfType<Button>())
+            {
+                button.Visible = false;
+            }
+            //Tablodan komutları döngüyle oluşturuyoruz. 
 
 
             //Oluşturulan Komut buttonlarını aktifliğine göre görüntülemek için.
@@ -127,6 +134,11 @@ namespace ReceteMain
                 }
             }
             baglanti.Close();
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
