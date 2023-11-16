@@ -57,6 +57,10 @@ namespace ReceteMain
         }
         private void Form2_Load(object sender, EventArgs e)
         {
+
+            //Button (Toplam Komut) sayısını göster.
+            int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
+            txtKomutSay.Text = buttonCount.ToString();
             //Form2 yüklendiğinde flowda hiç button yoksa Komut eklenemesin.
             if (flowRecetePanel.Controls.OfType<Button>().Count() == 0)
             {
@@ -74,31 +78,75 @@ namespace ReceteMain
         {
             foreach (Control control in flowRecetePanel.Controls)
             {
-                if (control.BackColor == Color.LightGreen)
+                if (control.BackColor == Color.LightGreen && flowRecetePanel.Controls.IndexOf(control)!=0)
                 {
                     return flowRecetePanel.Controls.IndexOf(control);
                 }
-
+                else if (control.BackColor == Color.LightGreen && flowRecetePanel.Controls.IndexOf(control) == 0)
+                {
+                    return flowRecetePanel.Controls.IndexOf(control)+1;
+                }
+ 
             }
-            return flowRecetePanel.Controls.OfType<Button>().Count(); ;
+            return 0;
+
+
         }
 
 
         //Seçili buton varsa altına ekleme yapıyoruz. Ve Buttonun click eventini atıyoruz.
-
         public void AddButtonToFlowLayoutPanel(Button button)
-        {
-            button.Click += Button_Click;
-            
-            // yeşil olan butonun indexini al.
-            int targetIndex = GetIndexOfGreenControl(button);
-            //butonu eklerken indexini yeşile göre seç.
-            flowRecetePanel.Controls.Add((button));
-            flowRecetePanel.Controls.SetChildIndex(button, targetIndex + 1);
-            //flowRecetePanel.Controls.Insert(targetIndex, button);
-            int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
-            txtKomutSay.Text = buttonCount.ToString();
+        {   //Eklenecek buton komut ise bu:
+            //Eğer FrmKomut içindeki butona tıklıyorsak:
+            if (Convert.ToInt32(button.Tag) < 48)
+            {
+                button.Click += Button_Click;
 
+                // yeşil olan butonun indexini al.
+                int targetIndexNew = flowRecetePanel.Controls.Count;
+                flowRecetePanel.Controls.Add((button));
+                flowRecetePanel.Controls.SetChildIndex(button, targetIndexNew + 1);
+            }
+            //Blok eklemek için ayrı bir durum kullanıyoruz.
+            //eğer FrmBlok Ekranının içindeki butona tıklıyorsak:
+            if (Convert.ToInt32(button.Tag) > 47)
+            {
+                button.Click += Button_Click;
+                // yeşil olan butonun indexini al.
+                int targetIndex = GetIndexOfGreenControl(button);
+                if (targetIndex > 0) // Eğer içeride yeşil bir button seçiliyse
+                {
+                    for (int i = targetIndex + 1; i < flowRecetePanel.Controls.Count; i++)
+                    {
+                        Control last = flowRecetePanel.Controls[flowRecetePanel.Controls.Count - 1];
+                        if (Convert.ToInt32(last.Tag) < 48) //flow un son elemanı komut ise bunu yap.
+                        {
+                            flowRecetePanel.Controls.Add((button));
+                            flowRecetePanel.Controls.SetChildIndex(button, i);
+                            break;
+                        }
+                        else // flowun son elemanı blok ise 
+                        {
+                            if (Convert.ToInt32((flowRecetePanel.Controls[i]).Tag) > 47) //Blok ile karşılaşırsa bunu yap 
+                            {
+                                flowRecetePanel.Controls.Add((button));
+                                flowRecetePanel.Controls.SetChildIndex(button, i);
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (targetIndex == 0) //Eğer seçili yeşil buton yoksa.
+                {
+
+                    int targetIndexNew = flowRecetePanel.Controls.Count;
+                    flowRecetePanel.Controls.Add((button));
+                    flowRecetePanel.Controls.SetChildIndex(button, targetIndexNew + 1);
+                }
+                ////butonu eklerken indexini yeşile göre seç.
+                //flowRecetePanel.Controls.Add((button));
+                //flowRecetePanel.Controls.SetChildIndex(button, targetIndex + 1);
+            }
         }
         //Seçili buton varsa üstüne ekleme yapıyoruz. Ve buttonun click eventini atıyoruz.
         public void AddButtonToFlowLayoutPanelTOP(Button button)
@@ -109,10 +157,7 @@ namespace ReceteMain
             //butonu eklerken indexini yeşile göre seç.
             flowRecetePanel.Controls.Add((button));
             flowRecetePanel.Controls.SetChildIndex(button, targetIndex - 1);
-            //flowRecetePanel.Controls.Insert(targetIndex, button);
-            int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
-            txtKomutSay.Text = buttonCount.ToString();
-
+     
         }
 
         //click eventimizi Button taggine göre tüm taglere ekliyoruz.
@@ -179,8 +224,8 @@ namespace ReceteMain
                     btn.BackColor = Color.LightGreen;
                     anaPanel.Controls.Clear();
                     KomutControl1 komutControl1 = new KomutControl1(Convert.ToInt32(btn.Tag)); //UserControlü FrmKomut üzerindeki Tag==ID'sine göre çağırıyoruz.
-                    //btnKmtAc.Enabled = true;
                     anaPanel.Controls.Add(komutControl1);
+                    btnKomut.Enabled = true;
 
                     break;
                 case 48:
@@ -190,6 +235,7 @@ namespace ReceteMain
                     anaPanel.Controls.Clear();
                     BlokControl blokControl = new BlokControl(Convert.ToInt32(btn.Tag)); //UserControlü FrmBlok üzerindeki Tag==ID'sine göre çağırıyoruz.
                     anaPanel.Controls.Add(blokControl);
+                    btnKomut.Enabled = false;
                     break;
                 default:
                     break;
@@ -250,6 +296,8 @@ namespace ReceteMain
             {
                 btnKomut.Enabled = true;
             }
+            int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
+            txtKomutSay.Text = buttonCount.ToString();
         }
 
         private void flowRecetePanel_ControlRemoved(object sender, ControlEventArgs e)
@@ -258,10 +306,13 @@ namespace ReceteMain
             {
                 btnKomut.Enabled = false;
             }
+            int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
+            txtKomutSay.Text = buttonCount.ToString();
         }
         //Buttona tıklanırsa renkler orijinale döner.
         private void btnSecımKaldır_Click(object sender, EventArgs e)
         {
+            btnKomut.Enabled = true;
             foreach (Button control in flowRecetePanel.Controls.OfType<Button>())
             {
                 if (control.Width > 130)

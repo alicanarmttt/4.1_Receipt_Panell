@@ -53,12 +53,12 @@ namespace ReceteMain
         }
       
         //Listedeki button için eğer tıklanan buttonsa arkaplan yeşil yap diğerlerini beyaz yap.
-        public void SetOtherButtonColors(Button clickedButton)
-        {
+        public void SetOtherButtonColors(Button button) 
+        { 
     
             foreach (Button control in flowLayoutPanel1.Controls.OfType<Button>())
             {
-                if (control == clickedButton)
+                if (control == button)
                     control.BackColor = Color.LightGreen;
                 else
                     control.BackColor = Color.White;
@@ -78,6 +78,7 @@ namespace ReceteMain
             }
             
         }
+        //butonu üste ekle
         private void btnUstEkle_Click(object sender, EventArgs e)
         {
             

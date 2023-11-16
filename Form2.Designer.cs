@@ -155,7 +155,7 @@
             this.btnBlok.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnBlok.Location = new System.Drawing.Point(3, 3);
             this.btnBlok.Name = "btnBlok";
-            this.btnBlok.Size = new System.Drawing.Size(73, 94);
+            this.btnBlok.Size = new System.Drawing.Size(80, 94);
             this.btnBlok.TabIndex = 0;
             this.btnBlok.Text = "Blok Ekle";
             this.btnBlok.UseVisualStyleBackColor = false;
@@ -167,7 +167,7 @@
             this.btnKomut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnKomut.Location = new System.Drawing.Point(89, 3);
             this.btnKomut.Name = "btnKomut";
-            this.btnKomut.Size = new System.Drawing.Size(73, 94);
+            this.btnKomut.Size = new System.Drawing.Size(80, 94);
             this.btnKomut.TabIndex = 1;
             this.btnKomut.Text = "Komut Ekle";
             this.btnKomut.UseVisualStyleBackColor = false;
