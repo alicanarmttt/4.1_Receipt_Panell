@@ -40,7 +40,14 @@ namespace ReceteMain
                     control.BackColor = Color.White;
             }
         }
-       
+        private void button_Click(object sender, EventArgs e)
+        {
+            secilenButonlar.Clear();
+            Button btn = sender as Button;
+            SetOtherButtonColors(btn);
+            secilenButonlar.Add(btn);
+        }
+
         //Listedeki buttonun özelliklerini kopyalıyoruz.
         private Button CloneButton(Button originalButton)
         {
@@ -58,13 +65,7 @@ namespace ReceteMain
             return clonedButton;
         }
 
-        private void button_Click(object sender, EventArgs e)
-        {
-            secilenButonlar.Clear();
-            Button btn = sender as Button;
-            SetOtherButtonColors(btn);
-            secilenButonlar.Add(btn);
-        }
+       
 
         //Ekle butonuna basınca, seçilen buton varsa oluşturduğun klonlama metoduyla seçilen butonu kopyala
         //Seçilen butonu Form2'yi çalıştırıp flow panele ekle.
@@ -86,15 +87,36 @@ namespace ReceteMain
             {
                 button.Visible = false;
             }
-
-            SqlCommand kmt = new SqlCommand("select KomutID, Aktif from TblRecete", baglanti);
+            //Tablodan komutları döngüyle oluşturuyoruz. 
+            SqlCommand kmt1 = new SqlCommand("select * from TblRecete where KomutID<48 and Aktif=1", baglanti);
             baglanti.Open();
-            SqlDataReader rd = kmt.ExecuteReader();
-            
-            while (rd.Read())
+            SqlDataReader rd1 = kmt1.ExecuteReader();
+            while(rd1.Read())
             {
-                int komutID = Convert.ToInt32(rd["KomutID"]);
-                bool aktiflik = Convert.ToBoolean(rd["Aktif"]);
+                // Her bir kayıt için bir buton oluştur
+                Button button = new Button();
+                button.Text = rd1["Komut"].ToString(); // Buton adını veritabanından alınan değerle ayarla
+                button.Tag = rd1["KomutID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
+                button.Size = new Size(130, 37);
+                button.BackColor= Color.White;
+                button.ForeColor = Color.Black;
+                button.Font = new Font("Microsoft Sans Serif", 10);
+                button.Click += button_Click;
+                flowLayoutPanel1.Controls.Add(button);
+            }
+            baglanti.Close();
+
+
+
+            //Oluşturulan Komut buttonlarını aktifliğine göre görüntülemek için.
+            SqlCommand kmt2 = new SqlCommand("select KomutID from TblRecete where Aktif=1", baglanti);
+            baglanti.Open();
+            SqlDataReader rd2 = kmt2.ExecuteReader();
+            
+            while (rd2.Read())
+            {
+                int komutID = Convert.ToInt32(rd2["KomutID"]);
+                
                 //button tagi var mı ya da tagiyle KomutID si eşleşiyor mu kontrol et.
                 Button targetButton = flowLayoutPanel1.Controls.OfType<Button>().FirstOrDefault(b => b.Tag != null && Convert.ToInt32(b.Tag) == komutID);
 
@@ -103,7 +125,6 @@ namespace ReceteMain
                     // Butonun görünürlüğünü ayarla
                     targetButton.Visible = true;
                 }
-                
             }
             baglanti.Close();
         }

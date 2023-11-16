@@ -157,6 +157,13 @@ namespace ReceteMain
                 int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
                 txtKomutSay.Text = buttonCount.ToString();
             }
+
+        }
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Form1'i göster
+            Form1 form1 = new Form1();
+            form1.Show();
         }
     }
 }
