@@ -15,6 +15,7 @@ namespace ReceteMain
     public partial class FrmBlok : Form
     {
         SqlConnection baglanti = new SqlConnection(@"Data Source=D15\SQLEXPRESS;Initial Catalog=Recete;Integrated Security=True");
+        
         public FrmBlok()
         {
             InitializeComponent();
@@ -26,9 +27,25 @@ namespace ReceteMain
         {
             this.Close();
         }
-
+        
         private void FrmBlok_Load(object sender, EventArgs e)
         {
+            Form2 frm2 = Form2.Instance;
+            //Eğer yüklü button varsa.
+            if (frm2.GetFlowRecetePanel().Controls.Count != 0)
+            {
+                Control lastControl = frm2.GetFlowRecetePanel().Controls[frm2.GetFlowRecetePanel().Controls.Count - 1];
+                //Son button Komutsa yeni komut eklemesine izin verme.
+                if (Convert.ToInt32(lastControl.Tag) > 47)
+                {
+                    btnEkle.Enabled = false;
+                }
+                else
+                {
+                    btnEkle.Enabled = true;
+                }
+            }
+               
             //Başlangıçta üste ekleme kapalı.
             btnUstEkle.Enabled = false;
 
@@ -68,7 +85,7 @@ namespace ReceteMain
         //Seçilen butonu Form2'yi çalıştırıp flow panele ekle.
         public void btnEkle_Click(object sender, EventArgs e)
         {
-            Form2 frm2 = Form2.Instance;
+
             if (secilenButonlar.Count > 0)
             {
                 Button secilenButton = CloneButton(secilenButonlar[0]); // Seçilen butonun kopyasını al
@@ -76,7 +93,7 @@ namespace ReceteMain
                 
                 form2.AddButtonToFlowLayoutPanel(secilenButton); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
             }
-            
+            this.Close();
         }
         //butonu üste ekle
         private void btnUstEkle_Click(object sender, EventArgs e)

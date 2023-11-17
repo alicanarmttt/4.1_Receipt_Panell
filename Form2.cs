@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
@@ -86,51 +87,64 @@ namespace ReceteMain
                 {
                     return flowRecetePanel.Controls.IndexOf(control)+1;
                 }
- 
             }
             return 0;
 
-
         }
-
-
+        
         //Seçili buton varsa altına ekleme yapıyoruz. Ve Buttonun click eventini atıyoruz.
         public void AddButtonToFlowLayoutPanel(Button button)
-        {   //Eklenecek buton komut ise bu:
-            //Eğer FrmKomut içindeki butona tıklıyorsak:
+        {   
+            //KOMUT EKLEMEK İSTİYORSAK
+
             if (Convert.ToInt32(button.Tag) < 48)
             {
                 button.Click += Button_Click;
-
-                // yeşil olan butonun indexini al.
-                int targetIndexNew = flowRecetePanel.Controls.Count;
-                flowRecetePanel.Controls.Add((button));
-                flowRecetePanel.Controls.SetChildIndex(button, targetIndexNew + 1);
-            }
-            //Blok eklemek için ayrı bir durum kullanıyoruz.
-            //eğer FrmBlok Ekranının içindeki butona tıklıyorsak:
-            if (Convert.ToInt32(button.Tag) > 47)
-            {
-                button.Click += Button_Click;
-                // yeşil olan butonun indexini al.
                 int targetIndex = GetIndexOfGreenControl(button);
-                if (targetIndex > 0) // Eğer içeride yeşil bir button seçiliyse
+                                      
+                if (targetIndex > 0)  //Eğer yeşil button varsa.
+                {
+                    flowRecetePanel.Controls.Add((button));
+                    flowRecetePanel.Controls.SetChildIndex(button, targetIndex + 1);
+                }
+                if (targetIndex == 0) //Eğer seçili yeşil buton yoksa.
+
+                {
+                    int targetIndexNew = flowRecetePanel.Controls.Count;
+                    flowRecetePanel.Controls.Add((button));
+                    flowRecetePanel.Controls.SetChildIndex(button, targetIndexNew + 1);
+                }
+            }
+            
+            //BLOK EKLEMEK İSTİYORSAK
+
+            if (Convert.ToInt32(button.Tag) > 47)
+            {   
+                button.Click += Button_Click;
+                //Yeşil button varsa indexini integer olarak getirir. Yeşil button ilk elemansa +1 eklenir. ()
+                //Yeşil seçili değilse 0 getirir. 
+                int targetIndex = GetIndexOfGreenControl(button);
+                if (targetIndex > 0) //Eğer içeride yeşil bir button seçiliyse
+                    
                 {
                     for (int i = targetIndex + 1; i < flowRecetePanel.Controls.Count; i++)
                     {
-                        Control last = flowRecetePanel.Controls[flowRecetePanel.Controls.Count - 1];
-                        if (Convert.ToInt32(last.Tag) < 48) //flow un son elemanı komut ise bunu yap.
-                        {
-                            flowRecetePanel.Controls.Add((button));
-                            flowRecetePanel.Controls.SetChildIndex(button, i);
-                            break;
-                        }
-                        else // flowun son elemanı blok ise 
-                        {
-                            if (Convert.ToInt32((flowRecetePanel.Controls[i]).Tag) > 47) //Blok ile karşılaşırsa bunu yap 
+                        if (Convert.ToInt32((flowRecetePanel.Controls[i]).Tag) > 47) //Blok ile karşılaşırsa bunu yap 
                             {
+                                //flowpanelin i. indexindeki butto komutsa oraya ekle.
                                 flowRecetePanel.Controls.Add((button));
                                 flowRecetePanel.Controls.SetChildIndex(button, i);
+                                break;
+                            }
+                        
+                        else if(i==flowRecetePanel.Controls.Count-1) //Eğer i tamsayısı son buttona da bakmış ise ulaşmış ise demekki Blok bulamamıştır. 
+                                                                     // Yani Flow Panelin son elemanı komut ise 
+                        {
+                            Control last = flowRecetePanel.Controls[flowRecetePanel.Controls.Count - 1];
+                            if (Convert.ToInt32(last.Tag) < 48) //flow un son elemanı komut ise bunu yap.
+                            {
+                                flowRecetePanel.Controls.Add((button));
+                                flowRecetePanel.Controls.SetChildIndex(button, i+1);
                                 break;
                             }
                         }
@@ -143,9 +157,7 @@ namespace ReceteMain
                     flowRecetePanel.Controls.Add((button));
                     flowRecetePanel.Controls.SetChildIndex(button, targetIndexNew + 1);
                 }
-                ////butonu eklerken indexini yeşile göre seç.
-                //flowRecetePanel.Controls.Add((button));
-                //flowRecetePanel.Controls.SetChildIndex(button, targetIndex + 1);
+                
             }
         }
         //Seçili buton varsa üstüne ekleme yapıyoruz. Ve buttonun click eventini atıyoruz.
@@ -226,12 +238,19 @@ namespace ReceteMain
                     KomutControl1 komutControl1 = new KomutControl1(Convert.ToInt32(btn.Tag)); //UserControlü FrmKomut üzerindeki Tag==ID'sine göre çağırıyoruz.
                     anaPanel.Controls.Add(komutControl1);
                     btnKomut.Enabled = true;
+                    btnSil.Enabled = true; ;
 
                     break;
                 case 48:
                 case 49:
                 case 50:
                     btn.BackColor = Color.LightGreen;
+                    // Eğer ilk Blok altına komut eklenmişse o Blok silinmesin.
+                    //ilk elema yeşilse indexini bir fazla aldığımız için -1 yazıyoruz.
+                    if (GetIndexOfGreenControl(btn)-1 == 0 && flowRecetePanel.Controls.Count > 1)
+                    {
+                        btnSil.Enabled = false;
+                    }
                     anaPanel.Controls.Clear();
                     BlokControl blokControl = new BlokControl(Convert.ToInt32(btn.Tag)); //UserControlü FrmBlok üzerindeki Tag==ID'sine göre çağırıyoruz.
                     anaPanel.Controls.Add(blokControl);
@@ -259,24 +278,88 @@ namespace ReceteMain
         {
             //silinecek olanı listele.
             List<Button> controlsToRemove = new List<Button>();
-
-            // Kaldırılacak olan kontrolleri belirle
+            int kacıncıEleman = 0;
+            // Kaldırılacak olan kontrolü bulup listeye al
             foreach (Button control in flowRecetePanel.Controls.OfType<Button>())
             {
+                //counter ile kaçıncı index olduğunu buluyoruz.
+                kacıncıEleman++;
                 if (control.BackColor == Color.LightGreen)
                 {
                     controlsToRemove.Add(control);
+                    break;
                 }
             }
-
-            // Belirlenen kontrolleri kaldır
-            foreach (Button controlToRemove in controlsToRemove)
+            //Yeşil olan kontrol eğere Bloksa
+            if (Convert.ToInt32(flowRecetePanel.Controls[kacıncıEleman - 1].Tag) > 47)
             {
-                flowRecetePanel.Controls.Remove(controlToRemove);
-                int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
-                txtKomutSay.Text = buttonCount.ToString();
-            }
+                //Son button Komut ise böyle yap
+                if (Convert.ToInt32(flowRecetePanel.Controls[flowRecetePanel.Controls.Count-1].Tag) < 48)
+                {
+                    List<Button> topluSilineceklerList = new List<Button>();
+                    for (int i = kacıncıEleman - 1; i < flowRecetePanel.Controls.Count; i++)
+                    {
+                        
+                        Button mevcutButton = (Button)flowRecetePanel.Controls[i];
+                        topluSilineceklerList.Add(mevcutButton);
+                        
+                    }
+                    foreach (Button silinecekButton in topluSilineceklerList)
+                    {
+                        flowRecetePanel.Controls.Remove(silinecekButton);
+                    }
 
+                }
+                    //Son komut Blok ise böyle yap. 
+                if (Convert.ToInt32(flowRecetePanel.Controls[flowRecetePanel.Controls.Count - 1 ].Tag) > 47)
+                {
+
+
+                    List<Button> topluSilineceklerList = new List<Button>();
+                    //Yeşil buttonun bir sonraki buttonundan başlayarak Komut buttonuna denk gelene kadar i yi arttırak buttonları sil.
+                    //i elemanın indekisini temsil ediyor. Çünkü KacıncıIndex=5 bir çıkarsa ise o button 4. index içindedir.
+                    for (int i = kacıncıEleman - 1; i < flowRecetePanel.Controls.Count + 1; i++)
+                    {
+                        
+                        Button mevcutButton = (Button)flowRecetePanel.Controls[i];
+                        topluSilineceklerList.Add(mevcutButton);
+
+                        //Eğer bir sonraki eleman Blok ise ondan önceki elemanı kaldır ve döngüyü durdur.
+                        if (Convert.ToInt32(flowRecetePanel.Controls[i + 1].Tag) > 47)
+                        {
+                            Button mevcutSonButton1 = (Button)flowRecetePanel.Controls[i];
+                            topluSilineceklerList.Add(mevcutSonButton1);
+                            break;
+                        }
+
+                    }
+                    foreach (Button silinecekButton in topluSilineceklerList)
+                    {
+                        flowRecetePanel.Controls.Remove(silinecekButton);
+                    }
+                }
+            }
+            //Yeşil Eleman Komutsa
+            else if (Convert.ToInt32(flowRecetePanel.Controls[kacıncıEleman - 1].Tag) < 48)
+            {
+                // Listedeki kontrolü kaldır.
+                foreach (Button controlToRemove in controlsToRemove)
+                {
+                    flowRecetePanel.Controls.Remove(controlToRemove);
+
+                }
+                controlsToRemove.Clear();
+            }
+            else
+            {
+                //Eğer seçili kontrol yoksa, son kontrolü kaldır.
+                if (controlsToRemove.Count == 0 && flowRecetePanel.Controls.Count > 0)
+                {
+                    Control lastButton = flowRecetePanel.Controls[flowRecetePanel.Controls.Count - 1];
+                    flowRecetePanel.Controls.Remove(lastButton);
+                }
+            }
+            
         }
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -289,8 +372,8 @@ namespace ReceteMain
         {
 
         }
-        //flowpanele control eklenmeden komut açılmıyor.
-        private void flowRecetePanel_ControlAdded(object sender, ControlEventArgs e)
+        //Flowpanele Blok eklenmeden komut açılmıyor.
+        public void flowRecetePanel_ControlAdded(object sender, ControlEventArgs e)
         {
             if (flowRecetePanel.Controls.Count > 0)
             {
@@ -300,7 +383,7 @@ namespace ReceteMain
             txtKomutSay.Text = buttonCount.ToString();
         }
 
-        private void flowRecetePanel_ControlRemoved(object sender, ControlEventArgs e)
+        public void flowRecetePanel_ControlRemoved(object sender, ControlEventArgs e)
         {
             if (flowRecetePanel.Controls.Count == 0)
             {
@@ -313,6 +396,7 @@ namespace ReceteMain
         private void btnSecımKaldır_Click(object sender, EventArgs e)
         {
             btnKomut.Enabled = true;
+            btnSil.Enabled = true;  
             foreach (Button control in flowRecetePanel.Controls.OfType<Button>())
             {
                 if (control.Width > 130)
