@@ -83,7 +83,10 @@ namespace ReceteMain
             {
                 btnKomut.Enabled = true;
             }
-
+            if (flowRecetePanel.Controls.Count == 0)
+            {
+                btnSil.Enabled = false;
+            }
         }
         //flowpaneldeki her kontrole baktığımda rengi green olanın indexini alıyoruz.
         //yoksa da toplam button sayısını integer olarak alıyoruz.
@@ -282,8 +285,10 @@ namespace ReceteMain
             UpdateButtonsEnability(false);
         }
 
+
         private void btnSil_Click(object sender, EventArgs e)
         {
+            
             //Silinecek olanı tutacağımız listeyi oluştur.
             List<Button> controlsToRemove = new List<Button>();
             int kacıncıEleman = 0;
@@ -313,15 +318,29 @@ namespace ReceteMain
                     Button mevcutButton = (Button)flowRecetePanel.Controls[i];
                     topluSilineceklerList.Add(mevcutButton);
                     //Eğer eklediğimiz son buttondan sonraki button blok türünde ise döngüyü durduruyoruz. 
-                    if (i < flowRecetePanel.Controls.Count - 1)
+                    if (flowRecetePanel.Controls.Count - 1 > i)
                     {
-                        if (Convert.ToInt32(flowRecetePanel.Controls[i + 1].Tag) > 47)
+                        if (Convert.ToInt32(flowRecetePanel.Controls[i+1].Tag) > 47)
                         {
-                            //Seçili butonu bir sonraki yapıyoruz.
                             flowRecetePanel.Controls[i + 1].BackColor = Color.LightGreen;
                             break;
+                            //Seçili butonu bir sonraki yapıyoruz.
+                            
                         }
                     }
+                    if(i ==flowRecetePanel.Controls.Count)
+                    {
+                        break;
+                    }
+                    
+                    //Bir sonraki elemana sahipse onu yeşil yap.
+                    //if(flowRecetePanel.Controls.Count>i+1)
+                    //{
+                    //    renkSıfırla();
+                    //    flowRecetePanel.Controls[i+1].BackColor = Color.LightGreen;
+                        
+                    //}
+
                 }
                 //flowRecetePanel.Controls[flowRecetePanel.Controls.OfType<Button>().Count()-1].BackColor = Color.LightGreen;
                 //Listeye eklenenleri tek tek siliyoruz.
@@ -348,21 +367,11 @@ namespace ReceteMain
                     controlsToRemove.Clear();
                 }
             }
-
-            //3-Yeşil (SEÇİLİ) button YOK İSE:
-            //else
-            //{
-            //    //Eğer seçili kontrol yoksa, son kontrolü kaldır.
-            //    if (controlsToRemove.Count == 0 && flowRecetePanel.Controls.Count > 0)
-            //    {
-            //        Control lastButton = flowRecetePanel.Controls[flowRecetePanel.Controls.Count - 1];
-            //        flowRecetePanel.Controls.Remove(lastButton);
-
-            //    }
-            //    //Seçili butonu bir sonraki yapıyoruz.
-            //    flowRecetePanel.Controls[flowRecetePanel.Controls.Count-1].BackColor = Color.LightGreen;
-            //}
-
+            if (flowRecetePanel.Controls.Count == 0)
+            {
+                btnSil.Enabled = false;
+            }
+       
         }
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
