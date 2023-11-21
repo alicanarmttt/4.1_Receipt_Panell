@@ -94,6 +94,7 @@
             this.btnIleri.TabIndex = 4;
             this.btnIleri.Text = "İleri";
             this.btnIleri.UseVisualStyleBackColor = true;
+            this.btnIleri.Click += new System.EventHandler(this.btnIleri_Click);
             // 
             // textBox2
             // 
@@ -243,6 +244,7 @@
             this.anaPanel.Name = "anaPanel";
             this.anaPanel.Size = new System.Drawing.Size(1073, 661);
             this.anaPanel.TabIndex = 4;
+            this.anaPanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.anaPanel_ControlAdded);
             // 
             // Form2
             // 

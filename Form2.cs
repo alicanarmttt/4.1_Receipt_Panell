@@ -16,8 +16,12 @@ namespace ReceteMain
 {
     public partial class Form2 : Form
     {
-        static Form2 _obj;
+
+        //Form2 içinde tanımlanan bir olay
+
+        //Bu iki blok kapanırsa ileri butonu aktif olsun.
         
+        static Form2 _obj;
         //Instance yaratıyoruz.
         public static Form2 Instance
         {
@@ -28,7 +32,9 @@ namespace ReceteMain
                 return _obj;
             }
         }
-        
+        //ileri butonunu static hale getiriyoruz
+        public static Button statikIleriButon;
+
         public Form2()
         {
             _obj = this;
@@ -36,6 +42,7 @@ namespace ReceteMain
             IsMdiContainer = true;
 
         }
+        
         //Btn görünürlüğü.
         public void UpdateButtonsEnability(bool isVisible)
         {
@@ -70,6 +77,7 @@ namespace ReceteMain
         private void Form2_Load(object sender, EventArgs e)
         {
 
+            statikIleriButon = btnIleri;
             //Button (Toplam Komut) sayısını göster.
             int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
             txtKomutSay.Text = buttonCount.ToString();
@@ -253,7 +261,15 @@ namespace ReceteMain
                     KomutControl1 komutControl1 = new KomutControl1(Convert.ToInt32(btn.Tag)); //UserControlü FrmKomut üzerindeki Tag==ID'sine göre çağırıyoruz.
                     anaPanel.Controls.Add(komutControl1);
                     btnKomut.Enabled = true;
+                    btnBlok.Enabled = false;
                     btnSil.Enabled = true; ;
+                    foreach (Control control in flowRecetePanel.Controls)
+                    {
+                        control.Enabled = false;
+                    }
+                    btnKomut.Enabled = false;
+                    btnSil.Enabled = false;
+                    btnBlok.Enabled = false;
                     break;
 
                 case 48:
@@ -276,6 +292,12 @@ namespace ReceteMain
             FrmBlok frmb = new FrmBlok();
             FormGetir(frmb);
             UpdateButtonsEnabilityBlok(false);
+            foreach (Control control in flowRecetePanel.Controls)
+            {
+                control.Enabled = false;
+            }
+            btnBlok.Enabled=false;
+            btnIleri.Enabled = false;
         }
 
         private void btnKomut_Click_1(object sender, EventArgs e)
@@ -283,12 +305,18 @@ namespace ReceteMain
             FrmKomut frmk = new FrmKomut();
             FormGetir(frmk);
             UpdateButtonsEnability(false);
+            foreach (Control control in flowRecetePanel.Controls)
+            {
+                control.Enabled = false;
+            }
+            btnKomut.Enabled = false;
+            btnIleri.Enabled = false;
         }
 
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            
+            anaPanel.Controls.Clear();
             //Silinecek olanı tutacağımız listeyi oluştur.
             List<Button> controlsToRemove = new List<Button>();
             int kacıncıEleman = 0;
@@ -305,7 +333,7 @@ namespace ReceteMain
                 }
             }
 
-            // Silinecek butonla ilgili 3 Olasılık var.
+            // Silinecek butonla ilgili 2 Olasılık var.
 
             //1-Yeşil (SEÇİLİ) button BLOK İSE: 
             if (Convert.ToInt32(flowRecetePanel.Controls[kacıncıEleman - 1].Tag) > 47)
@@ -327,22 +355,16 @@ namespace ReceteMain
                             //Seçili butonu bir sonraki yapıyoruz.
                             
                         }
+                        //if(flowRecetePanel.Controls.Count-1>i)
                     }
-                    if(i ==flowRecetePanel.Controls.Count)
+                    if(i==flowRecetePanel.Controls.Count-1 && i!=0)
                     {
+                        flowRecetePanel.Controls[kacıncıEleman-2].BackColor = Color.LightGreen;
                         break;
                     }
-                    
-                    //Bir sonraki elemana sahipse onu yeşil yap.
-                    //if(flowRecetePanel.Controls.Count>i+1)
-                    //{
-                    //    renkSıfırla();
-                    //    flowRecetePanel.Controls[i+1].BackColor = Color.LightGreen;
-                        
-                    //}
 
                 }
-                //flowRecetePanel.Controls[flowRecetePanel.Controls.OfType<Button>().Count()-1].BackColor = Color.LightGreen;
+                
                 //Listeye eklenenleri tek tek siliyoruz.
                 foreach (Button silinecekButton in topluSilineceklerList)
                 {
@@ -364,6 +386,7 @@ namespace ReceteMain
                 if (flowRecetePanel.Controls[kacıncıEleman - 2] != null)
                 {
                     flowRecetePanel.Controls[kacıncıEleman - 2].BackColor = Color.LightGreen;
+                    yesilButtonuAc();
                     controlsToRemove.Clear();
                 }
             }
@@ -389,14 +412,9 @@ namespace ReceteMain
             }
             int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
             txtKomutSay.Text = buttonCount.ToString();
-            foreach(Button button in flowRecetePanel.Controls.OfType<Button>())
-            {
-                if(button.BackColor == Color.LightGreen)
-                {
-                    button.Click += Button_Click;
-                    button.PerformClick();
-                }
-            }
+            //Flow a button eklendiğinde yeşil olan paneli aç.
+            yesilButtonuAc();
+            flowuAktifYap(false);
         }
 
         public void flowRecetePanel_ControlRemoved(object sender, ControlEventArgs e)
@@ -407,6 +425,7 @@ namespace ReceteMain
             }
             int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
             txtKomutSay.Text = buttonCount.ToString();
+            //yesilButtonuAc();
         }
        
         public int yesilIndex { get; set; }
@@ -434,7 +453,41 @@ namespace ReceteMain
             }
 
         }
+        public void flowuAktifYap(bool aktiflik)
+        {
+            foreach (Control control in flowRecetePanel.Controls)
+            {
+                control.Enabled = aktiflik;
+            }
+        }
 
-      
+        private void btnIleri_Click(object sender, EventArgs e)
+        {
+            flowuAktifYap(true);
+            anaPanel.Controls.Clear();
+            btnKomut.Enabled = true;
+            btnSil.Enabled=true;
+        }
+        //Yeşil buttonu ekrana aç
+        private void yesilButtonuAc()
+        {
+            foreach (Button button in flowRecetePanel.Controls.OfType<Button>())
+            {
+                if (button.BackColor == Color.LightGreen)
+                {
+                    button.Click += Button_Click;
+                    button.PerformClick();
+                }
+            }
+        }
+
+        private void anaPanel_ControlAdded(object sender, ControlEventArgs e)
+        {
+            
+        }
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
     }
 }

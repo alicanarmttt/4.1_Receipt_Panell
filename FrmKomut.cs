@@ -25,8 +25,9 @@ namespace ReceteMain
         private void btnIptal_Click(object sender, EventArgs e)
         {
             this.Close();
-            Form2 frm2 = new Form2();
-            
+            Form2 frm2 = Form2.Instance;
+            frm2.flowuAktifYap(true);
+
         }
 
         //Listedeki button için eğer tıklanan buttonsa arkaplan yeşil yap diğerlerini beyaz yap.
@@ -73,14 +74,16 @@ namespace ReceteMain
         private void btnEkle_Click_1(object sender, EventArgs e)
         {
             Form2 frm2 = Form2.Instance;
-
+            //frm2.flowuAktifYap();
             frm2.renkSıfırla();
             if (secilenButonlar.Count > 0)
             {
                 Button secilenButton = CloneButton(secilenButonlar[0]); // Seçilen butonun kopyasını al
                 Form2 form2 = Application.OpenForms["Form2"] as Form2;
                 form2.AddButtonToFlowLayoutPanel(secilenButton,form2.yesilIndex); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
+                this.Close();
             }
+            frm2.flowuAktifYap(false);
         }
 
         private void FrmKomut_Load(object sender, EventArgs e)
@@ -145,6 +148,11 @@ namespace ReceteMain
         {
             // Child form kapanırken ana formdaki buttonları güncelle
             Form2.Instance.UpdateButtonsEnability(true);
+        }
+
+        private void FrmKomut_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form2.statikIleriButon.Enabled = true;
         }
     }
 }

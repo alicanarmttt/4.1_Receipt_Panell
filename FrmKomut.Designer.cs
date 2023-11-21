@@ -119,6 +119,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FrmKomut";
             this.Text = "Komut Ekleme Sayfası";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmKomut_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmKomut_FormClosed);
             this.Load += new System.EventHandler(this.FrmKomut_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

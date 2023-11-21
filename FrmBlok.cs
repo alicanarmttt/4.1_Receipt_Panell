@@ -30,7 +30,8 @@ namespace ReceteMain
             Form2 frm2 = Form2.Instance;
             frm2.UpdateButtonsEnabilityBlok(true);
             this.Close();
-            
+            Form2.statikIleriButon.Enabled = true;
+
         }
         
         private void FrmBlok_Load(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace ReceteMain
         public void btnEkle_Click(object sender, EventArgs e)
         {
             Form2 frm2 = Form2.Instance;
-
+            Form2.statikIleriButon.Enabled = true;
             frm2.renkSıfırla();
             if (secilenButonlar.Count > 0)
             {
