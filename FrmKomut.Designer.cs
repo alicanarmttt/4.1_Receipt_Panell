@@ -75,7 +75,7 @@
             this.btnIptal.Name = "btnIptal";
             this.btnIptal.Size = new System.Drawing.Size(154, 57);
             this.btnIptal.TabIndex = 1;
-            this.btnIptal.Text = "İptal";
+            this.btnIptal.Text = "Çık";
             this.btnIptal.UseVisualStyleBackColor = true;
             this.btnIptal.Click += new System.EventHandler(this.btnIptal_Click);
             // 
@@ -118,7 +118,8 @@
             this.ClientSize = new System.Drawing.Size(679, 597);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FrmKomut";
-            this.Text = "y";
+            this.Text = "Komut Ekleme Sayfası";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmKomut_FormClosing_1);
             this.Load += new System.EventHandler(this.FrmKomut_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

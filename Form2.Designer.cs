@@ -29,26 +29,25 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblToplam = new System.Windows.Forms.Label();
+            this.txtKomutSay = new System.Windows.Forms.TextBox();
             this.btnIleri = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSil = new System.Windows.Forms.Button();
             this.btnBlok = new System.Windows.Forms.Button();
             this.btnKomut = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSil = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.flowRecetePanel = new System.Windows.Forms.FlowLayoutPanel();
             this.anaPanel = new System.Windows.Forms.Panel();
-            this.txtKomutSay = new System.Windows.Forms.TextBox();
-            this.lblToplam = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSecımKaldır = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -66,6 +65,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1339, 54);
             this.panel1.TabIndex = 0;
+            // 
+            // lblToplam
+            // 
+            this.lblToplam.AutoSize = true;
+            this.lblToplam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblToplam.Location = new System.Drawing.Point(1003, 15);
+            this.lblToplam.Name = "lblToplam";
+            this.lblToplam.Size = new System.Drawing.Size(151, 25);
+            this.lblToplam.TabIndex = 6;
+            this.lblToplam.Text = "Toplam Komut: \r\n";
+            // 
+            // txtKomutSay
+            // 
+            this.txtKomutSay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtKomutSay.Location = new System.Drawing.Point(1160, 12);
+            this.txtKomutSay.Name = "txtKomutSay";
+            this.txtKomutSay.ReadOnly = true;
+            this.txtKomutSay.Size = new System.Drawing.Size(56, 30);
+            this.txtKomutSay.TabIndex = 5;
             // 
             // btnIleri
             // 
@@ -131,27 +149,15 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 101F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 104F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(260, 104);
             this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // btnSil
-            // 
-            this.btnSil.BackColor = System.Drawing.Color.Red;
-            this.btnSil.FlatAppearance.BorderSize = 0;
-            this.btnSil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSil.Location = new System.Drawing.Point(3, 3);
-            this.btnSil.Name = "btnSil";
-            this.btnSil.Size = new System.Drawing.Size(76, 42);
-            this.btnSil.TabIndex = 2;
-            this.btnSil.Text = "Sil\r\n";
-            this.btnSil.UseVisualStyleBackColor = false;
-            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnBlok
             // 
             this.btnBlok.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btnBlok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBlok.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnBlok.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnBlok.Location = new System.Drawing.Point(3, 3);
             this.btnBlok.Name = "btnBlok";
@@ -165,6 +171,7 @@
             // 
             this.btnKomut.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.btnKomut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKomut.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnKomut.Location = new System.Drawing.Point(89, 3);
             this.btnKomut.Name = "btnKomut";
             this.btnKomut.Size = new System.Drawing.Size(80, 94);
@@ -172,6 +179,34 @@
             this.btnKomut.Text = "Komut Ekle";
             this.btnKomut.UseVisualStyleBackColor = false;
             this.btnKomut.Click += new System.EventHandler(this.btnKomut_Click_1);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.btnSil, 0, 1);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(175, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(82, 98);
+            this.tableLayoutPanel3.TabIndex = 2;
+            // 
+            // btnSil
+            // 
+            this.btnSil.BackColor = System.Drawing.Color.Red;
+            this.btnSil.FlatAppearance.BorderSize = 0;
+            this.btnSil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSil.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSil.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSil.Location = new System.Drawing.Point(3, 52);
+            this.btnSil.Name = "btnSil";
+            this.btnSil.Size = new System.Drawing.Size(76, 42);
+            this.btnSil.TabIndex = 2;
+            this.btnSil.Text = "Sil\r\n";
+            this.btnSil.UseVisualStyleBackColor = false;
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -208,52 +243,7 @@
             this.anaPanel.Name = "anaPanel";
             this.anaPanel.Size = new System.Drawing.Size(1073, 661);
             this.anaPanel.TabIndex = 4;
-            // 
-            // txtKomutSay
-            // 
-            this.txtKomutSay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtKomutSay.Location = new System.Drawing.Point(1160, 12);
-            this.txtKomutSay.Name = "txtKomutSay";
-            this.txtKomutSay.ReadOnly = true;
-            this.txtKomutSay.Size = new System.Drawing.Size(56, 30);
-            this.txtKomutSay.TabIndex = 5;
-            // 
-            // lblToplam
-            // 
-            this.lblToplam.AutoSize = true;
-            this.lblToplam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblToplam.Location = new System.Drawing.Point(1003, 15);
-            this.lblToplam.Name = "lblToplam";
-            this.lblToplam.Size = new System.Drawing.Size(151, 25);
-            this.lblToplam.TabIndex = 6;
-            this.lblToplam.Text = "Toplam Komut: \r\n";
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.btnSecımKaldır, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.btnSil, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(175, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(82, 98);
-            this.tableLayoutPanel3.TabIndex = 2;
-            // 
-            // btnSecımKaldır
-            // 
-            this.btnSecımKaldır.BackColor = System.Drawing.Color.LightGreen;
-            this.btnSecımKaldır.FlatAppearance.BorderSize = 0;
-            this.btnSecımKaldır.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSecımKaldır.Location = new System.Drawing.Point(3, 52);
-            this.btnSecımKaldır.Name = "btnSecımKaldır";
-            this.btnSecımKaldır.Size = new System.Drawing.Size(76, 42);
-            this.btnSecımKaldır.TabIndex = 3;
-            this.btnSecımKaldır.Text = "Seçimi Kaldır";
-            this.btnSecımKaldır.UseVisualStyleBackColor = false;
-            this.btnSecımKaldır.Click += new System.EventHandler(this.btnSecımKaldır_Click);
+            this.anaPanel.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.anaPanel_ControlRemoved);
             // 
             // Form2
             // 
@@ -266,13 +256,13 @@
             this.MinimumSize = new System.Drawing.Size(1357, 762);
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form2";
+            this.Text = "Reçete ";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -295,6 +285,5 @@
         private System.Windows.Forms.TextBox txtKomutSay;
         private System.Windows.Forms.Label lblToplam;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button btnSecımKaldır;
     }
 }

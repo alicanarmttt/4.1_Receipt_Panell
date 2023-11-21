@@ -15,37 +15,25 @@ namespace ReceteMain
     public partial class FrmBlok : Form
     {
         SqlConnection baglanti = new SqlConnection(@"Data Source=D15\SQLEXPRESS;Initial Catalog=Recete;Integrated Security=True");
-        
+        public static FrmBlok instance;
         public FrmBlok()
         {
             InitializeComponent();
+            instance = this;
         }
         //Tıklanan(seçili) buttonu atmak için liste oluşturuyoruz.
         public List<Button> secilenButonlar = new List<Button>();
 
         private void btnIptal_Click(object sender, EventArgs e)
         {
+            
             this.Close();
+            
         }
         
         private void FrmBlok_Load(object sender, EventArgs e)
         {
-            Form2 frm2 = Form2.Instance;
-            //Eğer yüklü button varsa.
-            if (frm2.GetFlowRecetePanel().Controls.Count != 0)
-            {
-                Control lastControl = frm2.GetFlowRecetePanel().Controls[frm2.GetFlowRecetePanel().Controls.Count - 1];
-                //Son button Komutsa yeni komut eklemesine izin verme.
-                if (Convert.ToInt32(lastControl.Tag) > 47)
-                {
-                    btnEkle.Enabled = false;
-                }
-                else
-                {
-                    btnEkle.Enabled = true;
-                }
-            }
-               
+            
             //Başlangıçta üste ekleme kapalı.
             btnUstEkle.Enabled = false;
 
@@ -67,6 +55,8 @@ namespace ReceteMain
                 flowLayoutPanel1.Controls.Add(button);
             }
             baglanti.Close();
+            flowLayoutPanel1.Controls[0].BackColor = Color.LightGreen;
+            secilenButonlar.Add((Button)flowLayoutPanel1.Controls[0]);
         }
       
         //Listedeki button için eğer tıklanan buttonsa arkaplan yeşil yap diğerlerini beyaz yap.
@@ -82,17 +72,19 @@ namespace ReceteMain
             }
         }
         //Ekle butonuna basınca, seçilen buton varsa oluşturduğun klonlama metoduyla seçilen butonu kopyala
-        //Seçilen butonu Form2'yi çalıştırıp flow panele ekle.
+        //Seçilen butonu Form2'yi çalıştırıp flow panele ekle.  
         public void btnEkle_Click(object sender, EventArgs e)
         {
+            Form2 frm2 = Form2.Instance;
 
+            frm2.renkSıfırla();
             if (secilenButonlar.Count > 0)
             {
                 Button secilenButton = CloneButton(secilenButonlar[0]); // Seçilen butonun kopyasını al
                 Form2 form2 = Application.OpenForms["Form2"] as Form2;
-                
-                form2.AddButtonToFlowLayoutPanel(secilenButton); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
+                form2.AddButtonToFlowLayoutPanel(secilenButton,form2.yesilIndex); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
             }
+
             this.Close();
         }
         //butonu üste ekle
@@ -115,7 +107,7 @@ namespace ReceteMain
             clonedButton.Text = originalButton.Text.Substring(4);
             clonedButton.Size = originalButton.Size;
             clonedButton.Location = originalButton.Location;
-            clonedButton.BackColor = Color.CornflowerBlue;
+            clonedButton.BackColor = Color.LightGreen;
             clonedButton.ForeColor = SystemColors.ButtonHighlight;
 
             clonedButton.Tag = originalButton.Tag;

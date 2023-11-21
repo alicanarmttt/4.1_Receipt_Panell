@@ -30,11 +30,11 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnUstEkle = new System.Windows.Forms.Button();
             this.btnIptal = new System.Windows.Forms.Button();
             this.btnEkle = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnUstEkle = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -69,6 +69,19 @@
             this.panel1.Size = new System.Drawing.Size(673, 114);
             this.panel1.TabIndex = 1;
             // 
+            // btnUstEkle
+            // 
+            this.btnUstEkle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnUstEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnUstEkle.Location = new System.Drawing.Point(74, 24);
+            this.btnUstEkle.Name = "btnUstEkle";
+            this.btnUstEkle.Size = new System.Drawing.Size(154, 57);
+            this.btnUstEkle.TabIndex = 2;
+            this.btnUstEkle.Text = "Üste Ekle";
+            this.btnUstEkle.UseVisualStyleBackColor = true;
+            this.btnUstEkle.Visible = false;
+            this.btnUstEkle.Click += new System.EventHandler(this.btnUstEkle_Click);
+            // 
             // btnIptal
             // 
             this.btnIptal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -77,7 +90,7 @@
             this.btnIptal.Name = "btnIptal";
             this.btnIptal.Size = new System.Drawing.Size(154, 57);
             this.btnIptal.TabIndex = 1;
-            this.btnIptal.Text = "İptal";
+            this.btnIptal.Text = "Çık";
             this.btnIptal.UseVisualStyleBackColor = true;
             this.btnIptal.Click += new System.EventHandler(this.btnIptal_Click);
             // 
@@ -109,22 +122,9 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(133, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10);
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(385, 471);
             this.flowLayoutPanel1.TabIndex = 3;
-            // 
-            // btnUstEkle
-            // 
-            this.btnUstEkle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnUstEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnUstEkle.Location = new System.Drawing.Point(74, 24);
-            this.btnUstEkle.Name = "btnUstEkle";
-            this.btnUstEkle.Size = new System.Drawing.Size(154, 57);
-            this.btnUstEkle.TabIndex = 2;
-            this.btnUstEkle.Text = "Üste Ekle";
-            this.btnUstEkle.UseVisualStyleBackColor = true;
-            this.btnUstEkle.Visible = false;
-            this.btnUstEkle.Click += new System.EventHandler(this.btnUstEkle_Click);
             // 
             // FrmBlok
             // 
@@ -133,7 +133,7 @@
             this.ClientSize = new System.Drawing.Size(679, 597);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FrmBlok";
-            this.Text = "FrmBlok";
+            this.Text = "Blok Ekleme Sayfası";
             this.Load += new System.EventHandler(this.FrmBlok_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

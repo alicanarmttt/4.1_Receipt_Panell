@@ -25,6 +25,8 @@ namespace ReceteMain
         private void btnIptal_Click(object sender, EventArgs e)
         {
             this.Close();
+            Form2 frm2 = new Form2();
+            
         }
 
         //Listedeki button için eğer tıklanan buttonsa arkaplan yeşil yap diğerlerini beyaz yap.
@@ -55,7 +57,7 @@ namespace ReceteMain
             clonedButton.Text = originalButton.Text.Substring(4);
             clonedButton.Size = originalButton.Size;
             clonedButton.Location = originalButton.Location;
-            clonedButton.BackColor = SystemColors.InactiveCaption;
+            clonedButton.BackColor = Color.LightGreen;
             clonedButton.ForeColor = SystemColors.ControlText;
 
             clonedButton.Tag = originalButton.Tag;
@@ -72,13 +74,14 @@ namespace ReceteMain
         {
             Form2 frm2 = Form2.Instance;
 
+            frm2.renkSıfırla();
             if (secilenButonlar.Count > 0)
             {
                 Button secilenButton = CloneButton(secilenButonlar[0]); // Seçilen butonun kopyasını al
                 Form2 form2 = Application.OpenForms["Form2"] as Form2;
-                form2.AddButtonToFlowLayoutPanel(secilenButton); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
+                form2.AddButtonToFlowLayoutPanel(secilenButton,form2.yesilIndex); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
             }
-        }   
+        }
 
         private void FrmKomut_Load(object sender, EventArgs e)
         {
@@ -98,7 +101,7 @@ namespace ReceteMain
                 Button button = new Button();
                 button.Text = rd1["Komut"].ToString(); // Buton adını veritabanından alınan değerle ayarla
                 button.Tag = rd1["KomutID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
-                button.Size = new Size(130, 37);
+                button.Size = new Size(130, 50);
                 button.BackColor= Color.White;
                 button.ForeColor = Color.Black;
                 button.Font = new Font("Microsoft Sans Serif", 10);
@@ -106,6 +109,8 @@ namespace ReceteMain
                 flowLayoutPanel1.Controls.Add(button);
             }
             baglanti.Close();
+            flowLayoutPanel1.Controls[0].BackColor = Color.LightGreen;
+            secilenButonlar.Add((Button)flowLayoutPanel1.Controls[0]);
 
             //başlangıçta her buttonun görünürlüğünü false ayarlıyoruz.
             foreach (Button button in flowLayoutPanel1.Controls.OfType<Button>())
@@ -135,10 +140,16 @@ namespace ReceteMain
             }
             baglanti.Close();
         }
-
+       
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void FrmKomut_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            // Child form kapanırken ana formdaki buttonları güncelle
+            Form2.Instance.UpdateButtonsEnability(true);
         }
     }
 }
