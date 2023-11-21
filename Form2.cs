@@ -48,10 +48,7 @@ namespace ReceteMain
             btnSil.Enabled = isVisible;
             btnKomut.Enabled = isVisible;
         }
-        //public FlowLayoutPanel GetFlowRecetePanel()
-        //{
-        //    return flowRecetePanel;
-        //}
+        
         //Bu metod içine verilen formu anaPanele control olarak ekler.
         public void FormGetir(Form Frm)
         {
@@ -67,7 +64,7 @@ namespace ReceteMain
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hata: " + ex.Message);
+                MessageBox.Show("Hata form Ana Panele eklenemedi: " + ex.Message);
             }
         }
         private void Form2_Load(object sender, EventArgs e)
@@ -76,6 +73,7 @@ namespace ReceteMain
             //Button (Toplam Komut) sayısını göster.
             int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
             txtKomutSay.Text = buttonCount.ToString();
+
             //Form2 yüklendiğinde flowda hiç button yoksa Komut eklenemesin.
             if (flowRecetePanel.Controls.OfType<Button>().Count() == 0)
             {
@@ -89,43 +87,27 @@ namespace ReceteMain
         }
         //flowpaneldeki her kontrole baktığımda rengi green olanın indexini alıyoruz.
         //yoksa da toplam button sayısını integer olarak alıyoruz.
-        private int GetIndexOfGreenControl(Button button)
-        {
-            foreach (Control control in flowRecetePanel.Controls)
-            {
-                if (control.BackColor == Color.LightGreen && flowRecetePanel.Controls.IndexOf(control) != 0)
-                {
-                    return flowRecetePanel.Controls.IndexOf(control);
-                }
-                else if (control.BackColor == Color.LightGreen && flowRecetePanel.Controls.IndexOf(control) == 0)
-                {
-                    return flowRecetePanel.Controls.IndexOf(control) + 1;
-                }
-            }
-            return 0;
-
-        }
-        ////Yeşil bir button varsa panelde, ismini alsın.
-        //string GetGreenButtonName(FlowLayoutPanel flowLayoutPanel)
+        //private int GetIndexOfGreenControl(Button button)
         //{
-        //    foreach (Control control in flowLayoutPanel.Controls)
+        //    foreach (Control control in flowRecetePanel.Controls)
         //    {
-        //        if (control is Button && control.BackColor == Color.LightGreen)
+        //        if (control.BackColor == Color.LightGreen && flowRecetePanel.Controls.IndexOf(control) != 0)
         //        {
-        //            return control.Name;
+        //            return flowRecetePanel.Controls.IndexOf(control);
+        //        }
+        //        else if (control.BackColor == Color.LightGreen && flowRecetePanel.Controls.IndexOf(control) == 0)
+        //        {
+        //            return flowRecetePanel.Controls.IndexOf(control) + 1;
         //        }
         //    }
+        //    return 0;
 
-        //    // Yeşil arka planlı bir Button bulunamadıysa null veya başka bir değer döndürebilirsiniz.
-        //    return null;
         //}
+        
 
-        //Seçili buton varsa altına ekleme yapıyoruz. Ve Buttonun click eventini atıyoruz.
+        //ALTA BUTTON EKLEME METODU
         public void AddButtonToFlowLayoutPanel(Button button, int targetIndex)
         {
-
-            //string yesilButtonIsmı = GetGreenButtonName(flowRecetePanel);
-            //int targetIndex = GetIndexOfGreenControl(flowRecetePanel.Controls.OfType<Button>().FirstOrDefault(btn => btn.Name == yesilButtonIsmı));
 
             //KOMUT EKLEMEK İSTİYORSAK
 
@@ -136,7 +118,7 @@ namespace ReceteMain
             
                     flowRecetePanel.Controls.Add((button));
                     flowRecetePanel.Controls.SetChildIndex(button, targetIndex + 1);
-                //}
+                
             }
 
             //BLOK EKLEMEK İSTİYORSAK
@@ -144,9 +126,7 @@ namespace ReceteMain
             if (Convert.ToInt32(button.Tag) > 47)
             {
                 button.Click += Button_Click;
-                //Yeşil button varsa indexini integer olarak getirir. Yeşil button ilk elemansa +1 eklenir. ()
-                //Yeşil seçili değilse 0 getirir. 
-                //int targetIndex = GetIndexOfGreenControl(button);
+                
 
                 //EĞER FLOWDA BUTTON YOKSA
                 if (flowRecetePanel.Controls.Count == 0)
@@ -160,18 +140,9 @@ namespace ReceteMain
 
                     for (int i = targetIndex; i < flowRecetePanel.Controls.Count; i++)
                     {
-                        if (Convert.ToInt32((flowRecetePanel.Controls[i]).Tag) > 47) //Blok ile karşılaşırsa bunu yap 
-                        {
-                            //flowpanelin i. indexindeki button komutsa oraya ekle.
-                            flowRecetePanel.Controls.Add((button));
-                            flowRecetePanel.Controls.SetChildIndex(button, i + 1);
-                            break;
-                        }
-                        //Eğer i tamsayısı son buttona da bakmış ise ulaşmış ise demekki Blok bulamamıştır. 
-                        // Yani Flow Panelin son elemanı komut ise
-                        else if (i == flowRecetePanel.Controls.Count - 1) 
-                            
-                                                                           
+                        //Son elemana kadar taradıysak. Blok bulamamışız demektir.
+                        if (i == flowRecetePanel.Controls.Count - 1)
+
                         {
                             Control last = flowRecetePanel.Controls[flowRecetePanel.Controls.Count - 1];
                             if (Convert.ToInt32(last.Tag) < 48) //flow un son elemanı komut ise bunu yap.
@@ -180,18 +151,33 @@ namespace ReceteMain
                                 flowRecetePanel.Controls.SetChildIndex(button, i + 1);
                                 break;
                             }
+                            else if(Convert.ToInt32(last.Tag) > 47)//flow un son elemanı blok ise bunu yap.
+                            {
+                                flowRecetePanel.Controls.Add((button));
+                                flowRecetePanel.Controls.SetChildIndex(button, i + 1);
+                                break;
+                            }
                         }
+                        //Blok ile karşılaşırsa bunu yap 
+                        //flowpanelin bir sonraki indexindeki button Bloksa, oraya ekle.
+                        else if (Convert.ToInt32((flowRecetePanel.Controls[i+1]).Tag) > 47) 
+                        {
+                            
+                            flowRecetePanel.Controls.Add((button));
+                            flowRecetePanel.Controls.SetChildIndex(button, i + 1);
+                            break;
+                        }
+
                     }
                 }
 
             }
         }
         //Seçili buton varsa üstüne ekleme yapıyoruz. Ve buttonun click eventini atıyoruz.
-        public void AddButtonToFlowLayoutPanelTOP(Button button)
+        public void AddButtonToFlowLayoutPanelTOP(Button button, int targetIndex)
         {
             button.Click += Button_Click;
-            // yeşil olan butonun indexini al.
-            int targetIndex = GetIndexOfGreenControl(button);
+            
             //butonu eklerken indexini yeşile göre seç.
             flowRecetePanel.Controls.Add((button));
             flowRecetePanel.Controls.SetChildIndex(button, targetIndex - 1);
@@ -265,8 +251,8 @@ namespace ReceteMain
                     anaPanel.Controls.Add(komutControl1);
                     btnKomut.Enabled = true;
                     btnSil.Enabled = true; ;
-
                     break;
+
                 case 48:
                 case 49:
                 case 50:

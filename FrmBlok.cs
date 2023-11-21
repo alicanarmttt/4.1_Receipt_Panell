@@ -99,7 +99,7 @@ namespace ReceteMain
                 Button secilenButton = CloneButton(secilenButonlar[0]);
                 // Seçilen butonun kopyasını al
                 Form2 form2 = Application.OpenForms["Form2"] as Form2;
-                form2.AddButtonToFlowLayoutPanelTOP(secilenButton); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ÜSTE ekle
+                form2.AddButtonToFlowLayoutPanelTOP(secilenButton,form2.yesilIndex); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ÜSTE ekle
             }
         }
         //içine verilen buttonun özelliklerini kopyalıyoruz.
