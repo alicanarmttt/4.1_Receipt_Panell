@@ -243,7 +243,6 @@
             this.anaPanel.Name = "anaPanel";
             this.anaPanel.Size = new System.Drawing.Size(1073, 661);
             this.anaPanel.TabIndex = 4;
-            this.anaPanel.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.anaPanel_ControlRemoved);
             // 
             // Form2
             // 
@@ -257,6 +256,7 @@
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reçete ";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

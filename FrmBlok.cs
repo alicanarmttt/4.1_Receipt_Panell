@@ -16,6 +16,7 @@ namespace ReceteMain
     {
         SqlConnection baglanti = new SqlConnection(@"Data Source=D15\SQLEXPRESS;Initial Catalog=Recete;Integrated Security=True");
         public static FrmBlok instance;
+        Form2 frm2 = Form2.Instance;
         public FrmBlok()
         {
             InitializeComponent();
@@ -26,7 +27,8 @@ namespace ReceteMain
 
         private void btnIptal_Click(object sender, EventArgs e)
         {
-            
+            Form2 frm2 = Form2.Instance;
+            frm2.UpdateButtonsEnabilityBlok(true);
             this.Close();
             
         }
@@ -84,8 +86,8 @@ namespace ReceteMain
                 Form2 form2 = Application.OpenForms["Form2"] as Form2;
                 form2.AddButtonToFlowLayoutPanel(secilenButton,form2.yesilIndex); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
             }
-
             this.Close();
+            
         }
         //butonu üste ekle
         private void btnUstEkle_Click(object sender, EventArgs e)
@@ -132,6 +134,9 @@ namespace ReceteMain
 
         }
 
-       
+        private void FrmBlok_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm2.UpdateButtonsEnabilityBlok(true);
+        }
     }
 }

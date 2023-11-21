@@ -85,13 +85,7 @@ namespace ReceteMain
 
         private void FrmKomut_Load(object sender, EventArgs e)
         {
-            ////Form2 nin instance ını üret.
-            //Form2 frm2 = Form2.Instance;
-            ////Frm2 de flow panelde button yoksa Ekleme tuşu kapansın.
-            //if (frm2.GetFlowRecetePanel().Controls.Count == 0)
-            //{
-            //    btnEkle.Enabled = false;
-            //}
+            
             SqlCommand kmt1 = new SqlCommand("select * from TblRecete where KomutID<48", baglanti);
             baglanti.Open();
             SqlDataReader rd1 = kmt1.ExecuteReader();
@@ -146,7 +140,8 @@ namespace ReceteMain
 
         }
 
-        private void FrmKomut_FormClosing_1(object sender, FormClosingEventArgs e)
+
+        private void FrmKomut_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Child form kapanırken ana formdaki buttonları güncelle
             Form2.Instance.UpdateButtonsEnability(true);

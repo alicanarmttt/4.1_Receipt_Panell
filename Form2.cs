@@ -42,6 +42,12 @@ namespace ReceteMain
             btnSil.Enabled = isVisible;
             btnBlok.Enabled = isVisible;
         }
+
+        public void UpdateButtonsEnabilityBlok(bool isVisible)
+        {
+            btnSil.Enabled = isVisible;
+            btnKomut.Enabled = isVisible;
+        }
         //public FlowLayoutPanel GetFlowRecetePanel()
         //{
         //    return flowRecetePanel;
@@ -191,17 +197,17 @@ namespace ReceteMain
             flowRecetePanel.Controls.SetChildIndex(button, targetIndex - 1);
 
         }
-
+        
         //click eventimizi Button taggine göre tüm taglere ekliyoruz.
         //click event==Blok Control adındaki usercontrolü anaPanele eklemek.
         public void Button_Click(object sender, EventArgs e)
         {
 
             Button btn = sender as Button;
-            //tıklanan butonu clickedButton olarak tut.
-            Button clickedButton = sender as Button;
-            //Tıklanan butonun indexini al.
-            int clickedIndex = flowRecetePanel.Controls.IndexOf(clickedButton);
+  
+            // Child form kapanırken ana formdaki buttonları güncelle
+            UpdateButtonsEnability(true);
+            UpdateButtonsEnabilityBlok(true);
 
             //her butonu kontrol edip tıklanmayan butonların rengini orijinaline çeviriyoruz.
             foreach (Button control in flowRecetePanel.Controls.OfType<Button>())
@@ -280,14 +286,14 @@ namespace ReceteMain
         {
             FrmBlok frmb = new FrmBlok();
             FormGetir(frmb);
+            UpdateButtonsEnabilityBlok(false);
         }
 
         private void btnKomut_Click_1(object sender, EventArgs e)
         {
             FrmKomut frmk = new FrmKomut();
             FormGetir(frmk);
-            btnBlok.Enabled = false;
-            btnSil.Enabled = false;
+            UpdateButtonsEnability(false);
         }
 
         private void btnSil_Click(object sender, EventArgs e)
@@ -378,11 +384,7 @@ namespace ReceteMain
             Form1 form1 = new Form1();
             form1.Show();
         }
-
-        private void btnKmtAc_Click(object sender, EventArgs e)
-        {
-
-        }
+      
         //Flowpanele Blok eklenmeden komut açılmıyor.
         public void flowRecetePanel_ControlAdded(object sender, ControlEventArgs e)
         {
@@ -392,8 +394,14 @@ namespace ReceteMain
             }
             int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
             txtKomutSay.Text = buttonCount.ToString();
-
-           
+            foreach(Button button in flowRecetePanel.Controls.OfType<Button>())
+            {
+                if(button.BackColor == Color.LightGreen)
+                {
+                    button.Click += Button_Click;
+                    button.PerformClick();
+                }
+            }
         }
 
         public void flowRecetePanel_ControlRemoved(object sender, ControlEventArgs e)
@@ -432,10 +440,6 @@ namespace ReceteMain
 
         }
 
-        private void anaPanel_ControlRemoved(object sender, ControlEventArgs e)
-        {
-            //btnSil.Enabled= true;
-            //btnKomut.Enabled = true;
-        }
+      
     }
 }

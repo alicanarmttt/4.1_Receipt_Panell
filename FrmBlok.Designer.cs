@@ -122,7 +122,7 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(133, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(385, 471);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
@@ -134,6 +134,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FrmBlok";
             this.Text = "Blok Ekleme Sayfası";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmBlok_FormClosed);
             this.Load += new System.EventHandler(this.FrmBlok_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
