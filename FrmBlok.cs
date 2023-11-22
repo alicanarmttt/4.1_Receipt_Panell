@@ -120,7 +120,7 @@ namespace ReceteMain
         private Button CloneButton(Button originalButton)
         {
             Button clonedButton = new Button();
-            clonedButton.Text = originalButton.Text.Substring(4);
+            clonedButton.Text = originalButton.Text;
             clonedButton.Size = originalButton.Size;
             clonedButton.Location = originalButton.Location;
             clonedButton.BackColor = Color.LightGreen;

@@ -481,16 +481,49 @@ namespace ReceteMain
 
                 // İlk "-" karakterine kadar olan kısmı sil
                 int index = controlText.IndexOf('-');
+                //eğer - varsa daha önceden sıralanmış yeni oluşturulmamış bir buton demektir.
                 if (index != -1)
                 {
-                    flowRecetePanel.Controls[i].Text = controlText.Substring(index + 2).Trim();
-                    flowRecetePanel.Controls[i].Text = i+1 + " - " + flowRecetePanel.Controls[i].Text;
+                    //Eğer i buttonu blok ise sırasını ekle
+                    if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag) > 47) {
+                        flowRecetePanel.Controls[i].Text = controlText.Substring(index + 2).Trim();
+                        flowRecetePanel.Controls[i].Text = i + 1.ToString("D2") + " - " + flowRecetePanel.Controls[i].Text;
+                    }
+                    //Eğer i buttonu komut ise üstteki Blok buttonunu bulsun
+                    if(Convert.ToInt32(flowRecetePanel.Controls[i].Tag)<48)
+                    {
+                        int altBaslik = 0;
+                        //Blok komutunu bulana kadar üste çıkıyoruz ve altbaslık değeri bizim alt başlık sayımız oluyor.
+                        for(int a=0; (Convert.ToInt32(flowRecetePanel.Controls[i - a].Tag) > 47); a++)
+                        {
+                            altBaslik++;
+                            break;
+                        }
+                        flowRecetePanel.Controls[i].Text = controlText.Substring(index + 2).Trim();
+                        flowRecetePanel.Controls[i].Text = (i + 1).ToString("D2") + " - " + "[" + altBaslik + "] " + flowRecetePanel.Controls[i].Text;
+                    }
                 }
+                //eğer - yoksa ilk defa eklenen bir btn demektir.
                 else if (index == -1) 
-                {
-                    flowRecetePanel.Controls[i].Text = i+1 + " - " + flowRecetePanel.Controls[i].Text;
+                {   //Eğer i buttonu blok ise sırasını ekle
+                    if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag) > 47)
+                    {
+                        flowRecetePanel.Controls[i].Text = (i + 1).ToString("D2") + " - " + flowRecetePanel.Controls[i].Text;
+                    }
+                    //Eğer i butonu komut ise 
+                    if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag)<48)
+                    {
+                        int altBaslik = 0;
+                        //Blok komutunu bulana kadar üste çıkıyoruz ve altbaslık değeri bizim alt başlık sayımız oluyor.
+                        for (int a = 0; (Convert.ToInt32(flowRecetePanel.Controls[i - a].Tag) > 47); a++)
+                        {
+                            altBaslik++;
+                            break;
+                        }
+                        flowRecetePanel.Controls[i].Text = controlText.Substring(index + 2).Trim();
+                        flowRecetePanel.Controls[i].Text = (i + 1).ToString("D2") + " - " + "[" + altBaslik + "] " + flowRecetePanel.Controls[i].Text;
+                    }
                 }
-                
             }   
         }
         private void anaPanel_ControlAdded(object sender, ControlEventArgs e)
