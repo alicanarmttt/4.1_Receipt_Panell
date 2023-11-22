@@ -73,20 +73,19 @@
             // 
             this.btnUstEkle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btnUstEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnUstEkle.Location = new System.Drawing.Point(74, 24);
+            this.btnUstEkle.Location = new System.Drawing.Point(9, 24);
             this.btnUstEkle.Name = "btnUstEkle";
-            this.btnUstEkle.Size = new System.Drawing.Size(154, 57);
+            this.btnUstEkle.Size = new System.Drawing.Size(111, 57);
             this.btnUstEkle.TabIndex = 2;
             this.btnUstEkle.Text = "Üste Ekle";
             this.btnUstEkle.UseVisualStyleBackColor = true;
-            this.btnUstEkle.Visible = false;
             this.btnUstEkle.Click += new System.EventHandler(this.btnUstEkle_Click);
             // 
             // btnIptal
             // 
             this.btnIptal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btnIptal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnIptal.Location = new System.Drawing.Point(451, 24);
+            this.btnIptal.Location = new System.Drawing.Point(346, 24);
             this.btnIptal.Name = "btnIptal";
             this.btnIptal.Size = new System.Drawing.Size(154, 57);
             this.btnIptal.TabIndex = 1;
@@ -98,7 +97,7 @@
             // 
             this.btnEkle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btnEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnEkle.Location = new System.Drawing.Point(262, 24);
+            this.btnEkle.Location = new System.Drawing.Point(157, 24);
             this.btnEkle.Name = "btnEkle";
             this.btnEkle.Size = new System.Drawing.Size(154, 57);
             this.btnEkle.TabIndex = 0;

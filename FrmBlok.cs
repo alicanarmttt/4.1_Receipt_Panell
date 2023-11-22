@@ -32,16 +32,23 @@ namespace ReceteMain
             Form2.statikBlokEkleBtn.Enabled = true;
             frm2.flowuAktifYap(true);
             this.Close();
-            //Form2.statikIleriButon.Enabled = true;
+            frm2.yesilButtonuAc();
+            
 
 
         }
         
         private void FrmBlok_Load(object sender, EventArgs e)
         {
+            Form2 frm2 = Form2.Instance;
+            if(frm2.flowReceteCount()==0)
+            {
+                btnUstEkle.Visible= false;
+            }
             
             //Başlangıçta üste ekleme kapalı.
-            btnUstEkle.Enabled = false;
+
+            //btnUstEkle.Enabled = false;
 
             //Tablodan komutları döngüyle oluşturuyoruz. 
             SqlCommand kmt1 = new SqlCommand("select * from TblRecete where KomutID>47 and Aktif=1", baglanti);
@@ -82,7 +89,6 @@ namespace ReceteMain
         public void btnEkle_Click(object sender, EventArgs e)
         {
             Form2 frm2 = Form2.Instance;
-            //Form2.statikIleriButon.Enabled = true;
             frm2.renkSıfırla();
             if (secilenButonlar.Count > 0)
             {
@@ -98,15 +104,17 @@ namespace ReceteMain
         //butonu üste ekle
         private void btnUstEkle_Click(object sender, EventArgs e)
         {
-            
             Form2 frm2 = Form2.Instance;
+            frm2.renkSıfırla();
             if (secilenButonlar.Count > 0)
             {
-                Button secilenButton = CloneButton(secilenButonlar[0]);
-                // Seçilen butonun kopyasını al
+                Button secilenButton = CloneButton(secilenButonlar[0]); // Seçilen butonun kopyasını al
                 Form2 form2 = Application.OpenForms["Form2"] as Form2;
-                form2.AddButtonToFlowLayoutPanelTOP(secilenButton,form2.yesilIndex); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ÜSTE ekle
+                form2.AddButtonToFlowLayoutPanelTOP(secilenButton, form2.yesilIndex); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
             }
+            frm2.UpdateButtonsEnability(true);
+            Form2.statikBlokEkleBtn.Enabled = true;
+            this.Close();
         }
         //içine verilen buttonun özelliklerini kopyalıyoruz.
         private Button CloneButton(Button originalButton)

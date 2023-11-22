@@ -175,11 +175,20 @@ namespace ReceteMain
         public void AddButtonToFlowLayoutPanelTOP(Button button, int targetIndex)
         {
             button.Click += Button_Click;
-            
-            //butonu eklerken indexini yeşile göre seç.
-            flowRecetePanel.Controls.Add((button));
-            flowRecetePanel.Controls.SetChildIndex(button, targetIndex - 1);
+            //EĞER FLOWDA BUTTON YOKSA
+            if (flowRecetePanel.Controls.Count == 0)
+            {
+                flowRecetePanel.Controls.Add((button));
 
+            }
+
+            //EĞER FLOWDA BUTTON VARSA
+            else 
+            {
+                flowRecetePanel.Controls.Add((button));
+                flowRecetePanel.Controls.SetChildIndex(button, targetIndex);
+
+            }   
         }
         
         //click eventimizi Button taggine göre tüm taglere ekliyoruz.
@@ -448,7 +457,7 @@ namespace ReceteMain
             //btnSil.Enabled=true;
         }
         //Yeşil buttonu ekrana aç
-        private void yesilButtonuAc()
+        public void yesilButtonuAc()
         {
             foreach (Button button in flowRecetePanel.Controls.OfType<Button>())
             {
@@ -467,6 +476,11 @@ namespace ReceteMain
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
             
+        }
+        public int flowReceteCount()
+        {
+            int count = flowRecetePanel.Controls.Count;
+            return count;
         }
     }
 }

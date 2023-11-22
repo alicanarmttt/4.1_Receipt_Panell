@@ -27,7 +27,9 @@ namespace ReceteMain
             this.Close();
             Form2 frm2 = Form2.Instance;
             frm2.flowuAktifYap(true);
-
+            Form2.statikBlokEkleBtn.Enabled = false;
+            Form2.statikKomutEkleBtn.Enabled = true;
+            frm2.yesilButtonuAc();
         }
 
         //Listedeki button için eğer tıklanan buttonsa arkaplan yeşil yap diğerlerini beyaz yap.
@@ -85,7 +87,7 @@ namespace ReceteMain
             }
             frm2.flowuAktifYap(true);
             Form2.statikBlokEkleBtn.Enabled = false;
-            Form2.statikSilBtn.Enabled = false;
+            
             Form2.statikSilBtn.Enabled = true;
         }
 
