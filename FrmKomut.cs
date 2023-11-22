@@ -62,7 +62,7 @@ namespace ReceteMain
             clonedButton.Location = originalButton.Location;
             clonedButton.BackColor = Color.LightGreen;
             clonedButton.ForeColor = SystemColors.ControlText;
-
+            clonedButton.TextAlign = ContentAlignment.MiddleLeft;
             clonedButton.Tag = originalButton.Tag;
             // Yeni butona click event handler ekliyoruz.
 
@@ -76,7 +76,7 @@ namespace ReceteMain
         private void btnEkle_Click_1(object sender, EventArgs e)
         {
             Form2 frm2 = Form2.Instance;
-            //frm2.flowuAktifYap();
+            
             frm2.renkSıfırla();
             if (secilenButonlar.Count > 0)
             {

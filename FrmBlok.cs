@@ -125,7 +125,7 @@ namespace ReceteMain
             clonedButton.Location = originalButton.Location;
             clonedButton.BackColor = Color.LightGreen;
             clonedButton.ForeColor = SystemColors.ButtonHighlight;
-
+            clonedButton.TextAlign = ContentAlignment.MiddleLeft;
             clonedButton.Tag = originalButton.Tag;
          
             return clonedButton;

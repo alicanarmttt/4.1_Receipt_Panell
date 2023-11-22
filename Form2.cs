@@ -400,6 +400,7 @@ namespace ReceteMain
             //Flow a button eklendiğinde yeşil olan paneli aç.
             yesilButtonuAc();
             flowuAktifYap(true);
+            UpdateflowButtonOrder();
         }
 
         public void flowRecetePanel_ControlRemoved(object sender, ControlEventArgs e)
@@ -414,6 +415,7 @@ namespace ReceteMain
             int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
             txtKomutSay.Text = buttonCount.ToString();
             //yesilButtonuAc();
+            UpdateflowButtonOrder();
         }
        
         public int yesilIndex { get; set; }
@@ -468,7 +470,29 @@ namespace ReceteMain
                 }
             }
         }
+        private bool orderNumberHasAdded = false;
+        //Her eklediğimiz button indexini textinin başına ekliyor. 1- gibi. 
+        //Sırası atanmış butonların da eski sırasını silip yeni indexini ekleyerek güncelliyor.
+        private void UpdateflowButtonOrder()
+        {
+            for(int i=0;i<flowRecetePanel.Controls.Count;i++)
+            {
+                string controlText = flowRecetePanel.Controls[i].Text;
 
+                // İlk "-" karakterine kadar olan kısmı sil
+                int index = controlText.IndexOf('-');
+                if (index != -1)
+                {
+                    flowRecetePanel.Controls[i].Text = controlText.Substring(index + 2).Trim();
+                    flowRecetePanel.Controls[i].Text = i+1 + " - " + flowRecetePanel.Controls[i].Text;
+                }
+                else if (index == -1) 
+                {
+                    flowRecetePanel.Controls[i].Text = i+1 + " - " + flowRecetePanel.Controls[i].Text;
+                }
+                
+            }   
+        }
         private void anaPanel_ControlAdded(object sender, ControlEventArgs e)
         {
             
