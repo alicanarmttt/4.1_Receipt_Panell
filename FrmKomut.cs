@@ -83,7 +83,10 @@ namespace ReceteMain
                 form2.AddButtonToFlowLayoutPanel(secilenButton,form2.yesilIndex); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
                 this.Close();
             }
-            frm2.flowuAktifYap(false);
+            frm2.flowuAktifYap(true);
+            Form2.statikBlokEkleBtn.Enabled = false;
+            Form2.statikSilBtn.Enabled = false;
+            Form2.statikSilBtn.Enabled = true;
         }
 
         private void FrmKomut_Load(object sender, EventArgs e)
@@ -152,7 +155,7 @@ namespace ReceteMain
 
         private void FrmKomut_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Form2.statikIleriButon.Enabled = true;
+            //Form2.statikIleriButon.Enabled = true;
         }
     }
 }

@@ -29,8 +29,11 @@ namespace ReceteMain
         {
             Form2 frm2 = Form2.Instance;
             frm2.UpdateButtonsEnabilityBlok(true);
+            Form2.statikBlokEkleBtn.Enabled = true;
+            frm2.flowuAktifYap(true);
             this.Close();
-            Form2.statikIleriButon.Enabled = true;
+            //Form2.statikIleriButon.Enabled = true;
+
 
         }
         
@@ -79,7 +82,7 @@ namespace ReceteMain
         public void btnEkle_Click(object sender, EventArgs e)
         {
             Form2 frm2 = Form2.Instance;
-            Form2.statikIleriButon.Enabled = true;
+            //Form2.statikIleriButon.Enabled = true;
             frm2.renkSıfırla();
             if (secilenButonlar.Count > 0)
             {
@@ -87,6 +90,8 @@ namespace ReceteMain
                 Form2 form2 = Application.OpenForms["Form2"] as Form2;
                 form2.AddButtonToFlowLayoutPanel(secilenButton,form2.yesilIndex); // Form2'deki FlowLayoutPanel'a kopyalanan butonu ekle
             }
+            frm2.UpdateButtonsEnability(true);
+            Form2.statikBlokEkleBtn.Enabled = true;
             this.Close();
             
         }
