@@ -93,7 +93,7 @@ namespace ReceteMain
         private void FrmKomut_Load(object sender, EventArgs e)
         {
             
-            SqlCommand kmt1 = new SqlCommand("select * from TblRecete where KomutID<48", baglanti);
+            SqlCommand kmt1 = new SqlCommand("select * from TblReceteFull where [Komut ID]<48", baglanti);
             baglanti.Open();
             SqlDataReader rd1 = kmt1.ExecuteReader();
             while(rd1.Read())
@@ -101,7 +101,7 @@ namespace ReceteMain
                 // Her bir kayıt için bir buton oluştur
                 Button button = new Button();
                 button.Text = rd1["Komut"].ToString(); // Buton adını veritabanından alınan değerle ayarla
-                button.Tag = rd1["KomutID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
+                button.Tag = rd1["Komut ID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
                 button.Size = new Size(145, 50);
                 button.BackColor= Color.White;
                 button.ForeColor = Color.Black;
@@ -122,13 +122,13 @@ namespace ReceteMain
 
 
             //Oluşturulan Komut buttonlarını aktifliğine göre görüntülemek için.
-            SqlCommand kmt2 = new SqlCommand("select KomutID from TblRecete where Aktif=1", baglanti);
+            SqlCommand kmt2 = new SqlCommand("select [Komut ID] from TblReceteFull where AKTİF=1", baglanti);
             baglanti.Open();
             SqlDataReader rd2 = kmt2.ExecuteReader();
             
             while (rd2.Read())
             {
-                int komutID = Convert.ToInt32(rd2["KomutID"]);
+                int komutID = Convert.ToInt32(rd2["Komut ID"]);
                 
                 //button tagi var mı ya da tagiyle KomutID si eşleşiyor mu kontrol et.
                 Button targetButton = flowLayoutPanel1.Controls.OfType<Button>().FirstOrDefault(b => b.Tag != null && Convert.ToInt32(b.Tag) == komutID);
