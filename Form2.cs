@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,9 +19,9 @@ namespace ReceteMain
     {
 
         //Form2 içinde tanımlanan bir olay
-
-        //Bu iki blok kapanırsa ileri butonu aktif olsun.
         
+        //Bu iki blok kapanırsa ileri butonu aktif olsun.
+
         static Form2 _obj;
         //Instance yaratıyoruz.
         public static Form2 Instance
@@ -44,7 +45,9 @@ namespace ReceteMain
             IsMdiContainer = true;
 
         }
-        
+
+        // Özel olayı tetikleyen korumalı bir metod
+      
         //Btn görünürlüğü.
         public void UpdateButtonsEnability(bool isVisible)
         {
@@ -114,9 +117,10 @@ namespace ReceteMain
                 button.Click += Button_Click;
 
             
-                    flowRecetePanel.Controls.Add((button));
-                    flowRecetePanel.Controls.SetChildIndex(button, targetIndex + 1);
-                
+                flowRecetePanel.Controls.Add((button));
+                flowRecetePanel.Controls.SetChildIndex(button, targetIndex + 1);
+                flowButtonOrderText();
+
             }
 
             //BLOK EKLEMEK İSTİYORSAK
@@ -147,12 +151,15 @@ namespace ReceteMain
                             {
                                 flowRecetePanel.Controls.Add((button));
                                 flowRecetePanel.Controls.SetChildIndex(button, i + 1);
+
+                                flowButtonOrderText();
                                 break;
                             }
                             else if(Convert.ToInt32(last.Tag) > 47)//flow un son elemanı blok ise bunu yap.
                             {
                                 flowRecetePanel.Controls.Add((button));
                                 flowRecetePanel.Controls.SetChildIndex(button, i + 1);
+                                flowButtonOrderText();
                                 break;
                             }
                         }
@@ -163,23 +170,25 @@ namespace ReceteMain
                             
                             flowRecetePanel.Controls.Add((button));
                             flowRecetePanel.Controls.SetChildIndex(button, i + 1);
+                            flowButtonOrderText();
+
                             break;
                         }
-
+                        
                     }
                 }
-
+                
             }
         }
         //Seçili buton varsa üstüne ekleme yapıyoruz. Ve buttonun click eventini atıyoruz.
         public void AddButtonToFlowLayoutPanelTOP(Button button, int targetIndex)
         {
             button.Click += Button_Click;
+            
             //EĞER FLOWDA BUTTON YOKSA
             if (flowRecetePanel.Controls.Count == 0)
             {
                 flowRecetePanel.Controls.Add((button));
-
             }
 
             //EĞER FLOWDA BUTTON VARSA
@@ -187,10 +196,11 @@ namespace ReceteMain
             {
                 flowRecetePanel.Controls.Add((button));
                 flowRecetePanel.Controls.SetChildIndex(button, targetIndex);
-
+                flowButtonOrderText();
             }   
         }
-        
+
+
         //click eventimizi Button taggine göre tüm taglere ekliyoruz.
         //click event==Blok Control adındaki usercontrolü anaPanele eklemek.
         public void Button_Click(object sender, EventArgs e)
@@ -275,6 +285,9 @@ namespace ReceteMain
             }
 
         }
+
+        //BLOK EKLE BUTONU
+
         //Blok ve komut ekleme elemanlarında her türlü button inaktiftir.
         private void btnBlok_Click_1(object sender, EventArgs e)
         {
@@ -290,6 +303,7 @@ namespace ReceteMain
             //btnIleri.Enabled = false;
         }
 
+        //KOMUT EKLE BUTONU
         private void btnKomut_Click_1(object sender, EventArgs e)
         {
             FrmKomut frmk = new FrmKomut();
@@ -345,10 +359,13 @@ namespace ReceteMain
                             break;
                         }   
                     }
-                    if(i==flowRecetePanel.Controls.Count-1 && i!=0)
+                    if (flowRecetePanel.Controls.IndexOf(flowRecetePanel.Controls[kacıncıEleman - 1])!=0)
                     {
-                        flowRecetePanel.Controls[kacıncıEleman-2].BackColor = Color.LightGreen;
-                        break;
+                        if (i == flowRecetePanel.Controls.Count - 1 && i != 0)
+                        {
+                            flowRecetePanel.Controls[kacıncıEleman - 2].BackColor = Color.LightGreen;
+                            break;
+                        }
                     }
                 }
                 
@@ -400,7 +417,8 @@ namespace ReceteMain
             //Flow a button eklendiğinde yeşil olan paneli aç.
             yesilButtonuAc();
             flowuAktifYap(true);
-            UpdateflowButtonOrder();
+            flowButtonOrderText();
+
         }
 
         public void flowRecetePanel_ControlRemoved(object sender, ControlEventArgs e)
@@ -414,8 +432,7 @@ namespace ReceteMain
             //Toplam komut sayma işlemi
             int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
             txtKomutSay.Text = buttonCount.ToString();
-            //yesilButtonuAc();
-            UpdateflowButtonOrder();
+            flowButtonOrderText();
         }
        
         public int yesilIndex { get; set; }
@@ -426,7 +443,6 @@ namespace ReceteMain
                 if (control.BackColor == Color.LightGreen)
                 {
                     yesilIndex = flowRecetePanel.Controls.GetChildIndex(control);
-                    
 
                 }
                 if (control.Width > 130)
@@ -434,10 +450,8 @@ namespace ReceteMain
                     control.BackColor = Color.CornflowerBlue;
 
                 }
-
                 else
                 {
-
                     control.BackColor = SystemColors.InactiveCaption;
                 }
             }
@@ -470,62 +484,76 @@ namespace ReceteMain
                 }
             }
         }
-        private bool orderNumberHasAdded = false;
+        
         //Her eklediğimiz button indexini textinin başına ekliyor. 1- gibi. 
         //Sırası atanmış butonların da eski sırasını silip yeni indexini ekleyerek güncelliyor.
-        private void UpdateflowButtonOrder()
+        private void flowButtonOrderText()
         {
-            for(int i=0;i<flowRecetePanel.Controls.Count;i++)
+            //Eğer flowRecetePanel'de control varsa.
+            if (flowRecetePanel.Controls.Count > 0)
             {
-                string controlText = flowRecetePanel.Controls[i].Text;
-
-                // İlk "-" karakterine kadar olan kısmı sil
-                int index = controlText.IndexOf('-');
-                //eğer - varsa daha önceden sıralanmış yeni oluşturulmamış bir buton demektir.
-                if (index != -1)
+                //Her butonu her zaman sırayla güncelliyoruz. 
+                for (int i = 0; i < flowRecetePanel.Controls.Count; i++)
                 {
-                    //Eğer i buttonu blok ise sırasını ekle
-                    if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag) > 47) {
-                        flowRecetePanel.Controls[i].Text = controlText.Substring(index + 2).Trim();
-                        flowRecetePanel.Controls[i].Text = i + 1.ToString("D2") + " - " + flowRecetePanel.Controls[i].Text;
-                    }
-                    //Eğer i buttonu komut ise üstteki Blok buttonunu bulsun
-                    if(Convert.ToInt32(flowRecetePanel.Controls[i].Tag)<48)
+                    string controlText = flowRecetePanel.Controls[i].Text;
+
+                    // İlk "-" karakterine kadar olan kısmı sil
+                    int index = controlText.IndexOf('-');
+                    //eğer - yoksa ilk defa eklenen bir btn demektir.
+                    if (index == -1)
                     {
-                        int altBaslik = 0;
-                        //Blok komutunu bulana kadar üste çıkıyoruz ve altbaslık değeri bizim alt başlık sayımız oluyor.
-                        for(int a=0; (Convert.ToInt32(flowRecetePanel.Controls[i - a].Tag) > 47); a++)
+                        //Eğer i buttonu blok ise sırasını ekle
+                        if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag) > 47)
                         {
-                            altBaslik++;
-                            break;
+                            flowRecetePanel.Controls[i].Text = (i+1).ToString("D2") + " - " + flowRecetePanel.Controls[i].Text;
                         }
-                        flowRecetePanel.Controls[i].Text = controlText.Substring(index + 2).Trim();
-                        flowRecetePanel.Controls[i].Text = (i + 1).ToString("D2") + " - " + "[" + altBaslik + "] " + flowRecetePanel.Controls[i].Text;
-                    }
-                }
-                //eğer - yoksa ilk defa eklenen bir btn demektir.
-                else if (index == -1) 
-                {   //Eğer i buttonu blok ise sırasını ekle
-                    if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag) > 47)
-                    {
-                        flowRecetePanel.Controls[i].Text = (i + 1).ToString("D2") + " - " + flowRecetePanel.Controls[i].Text;
-                    }
-                    //Eğer i butonu komut ise 
-                    if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag)<48)
-                    {
-                        int altBaslik = 0;
-                        //Blok komutunu bulana kadar üste çıkıyoruz ve altbaslık değeri bizim alt başlık sayımız oluyor.
-                        for (int a = 0; (Convert.ToInt32(flowRecetePanel.Controls[i - a].Tag) > 47); a++)
+                        //Eğer i butonu komut ise 
+                        if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag) < 48)
                         {
-                            altBaslik++;
-                            break;
+                            int altBaslik = 0;
+                            //Blok komutunu bulana kadar üste çıkıyoruz ve altbaslık değeri bizim alt başlık sayımız oluyor.
+                            for (int a = 0; (Convert.ToInt32(flowRecetePanel.Controls[i - a].Tag) < 48); a++)
+                            {
+                                altBaslik++;
+                            }
+                            flowRecetePanel.Controls[i].Text = (i + 1).ToString("D2") + " - " + "[" + altBaslik.ToString("D2") + "] " + flowRecetePanel.Controls[i].Text;
                         }
-                        flowRecetePanel.Controls[i].Text = controlText.Substring(index + 2).Trim();
-                        flowRecetePanel.Controls[i].Text = (i + 1).ToString("D2") + " - " + "[" + altBaslik + "] " + flowRecetePanel.Controls[i].Text;
                     }
+
+                    //eğer - varsa daha önceden sıralanmış yeni oluşturulmamış bir buton demektir.
+                    else if (index != -1)
+                    {   
+                        
+                        //Eğer i buttonu blok ise sırasını ekle
+                        if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag) > 47)
+                        {
+                            flowRecetePanel.Controls[i].Text = controlText.Substring(index + 2).Trim();
+                            flowRecetePanel.Controls[i].Text = (i + 1).ToString("D2") + " - " + flowRecetePanel.Controls[i].Text;
+                        }
+                        //Eğer i buttonu komut ise üstteki Blok buttonunu bulsun
+                        if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag) < 48)
+                        {
+                            int altBaslik = 0;
+                            //İlk index zaten komut olamıyor. O yüzden for döngüsündeki şartın bozulmaması için i=0 olduğu duruma bakmasın.
+                            if (flowRecetePanel.Controls.Count>0)
+                            {
+                                //Blok komutunu bulana kadar üste çıkıyoruz ve altbaslık değeri bizim alt başlık sayımız oluyor.
+                                for (int a = 0; (i - a >= 0) && (Convert.ToInt32(flowRecetePanel.Controls[i - a].Tag) < 48); a++)
+                                {
+                                    altBaslik++;
+                                }
+                                flowRecetePanel.Controls[i].Text = controlText.Substring(index + 6).Trim();
+                                flowRecetePanel.Controls[i].Text = (i + 1).ToString("D2") + " - " + "[" + altBaslik.ToString("D2") + "] " + flowRecetePanel.Controls[i].Text;
+                            }
+                        }
+                        
+
+                    }
+
                 }
-            }   
+            }
         }
+    
         private void anaPanel_ControlAdded(object sender, ControlEventArgs e)
         {
             
@@ -540,4 +568,5 @@ namespace ReceteMain
             return count;
         }
     }
+    
 }

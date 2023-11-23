@@ -87,7 +87,6 @@ namespace ReceteMain
             }
             frm2.flowuAktifYap(true);
             Form2.statikBlokEkleBtn.Enabled = false;
-            
             Form2.statikSilBtn.Enabled = true;
         }
 
