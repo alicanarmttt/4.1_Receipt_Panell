@@ -60,7 +60,7 @@ namespace ReceteMain
                 Button button = new Button();
                 button.Text = rd1["Komut"].ToString(); // Buton adını veritabanından alınan değerle ayarla
                 button.Tag = rd1["KomutID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
-                button.Size = new Size(150, 50);
+                button.Size = new Size(175, 50);
                 button.BackColor = Color.White;
                 button.ForeColor = Color.Black;
                 button.Font = new Font("Microsoft Sans Serif", 12);
@@ -124,7 +124,7 @@ namespace ReceteMain
             clonedButton.Size = originalButton.Size;
             clonedButton.Location = originalButton.Location;
             clonedButton.BackColor = Color.LightGreen;
-            clonedButton.ForeColor = SystemColors.ButtonHighlight;
+            clonedButton.ForeColor = originalButton.ForeColor;
             clonedButton.TextAlign = ContentAlignment.MiddleLeft;
             clonedButton.Tag = originalButton.Tag;
          

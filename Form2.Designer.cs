@@ -151,7 +151,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 104F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(260, 104);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(273, 104);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // btnBlok
@@ -173,7 +173,7 @@
             this.btnKomut.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.btnKomut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnKomut.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnKomut.Location = new System.Drawing.Point(89, 3);
+            this.btnKomut.Location = new System.Drawing.Point(94, 3);
             this.btnKomut.Name = "btnKomut";
             this.btnKomut.Size = new System.Drawing.Size(80, 94);
             this.btnKomut.TabIndex = 1;
@@ -186,7 +186,7 @@
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.btnSil, 0, 1);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(175, 3);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(185, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -221,7 +221,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.50983F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.49017F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(266, 661);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(279, 661);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // flowRecetePanel
@@ -231,7 +231,7 @@
             this.flowRecetePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowRecetePanel.Location = new System.Drawing.Point(3, 3);
             this.flowRecetePanel.Name = "flowRecetePanel";
-            this.flowRecetePanel.Size = new System.Drawing.Size(260, 545);
+            this.flowRecetePanel.Size = new System.Drawing.Size(273, 545);
             this.flowRecetePanel.TabIndex = 4;
             this.flowRecetePanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.flowRecetePanel_ControlAdded);
             this.flowRecetePanel.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.flowRecetePanel_ControlRemoved);
@@ -240,9 +240,9 @@
             // 
             this.anaPanel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.anaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.anaPanel.Location = new System.Drawing.Point(266, 54);
+            this.anaPanel.Location = new System.Drawing.Point(279, 54);
             this.anaPanel.Name = "anaPanel";
-            this.anaPanel.Size = new System.Drawing.Size(1073, 661);
+            this.anaPanel.Size = new System.Drawing.Size(1060, 661);
             this.anaPanel.TabIndex = 4;
             this.anaPanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.anaPanel_ControlAdded);
             // 

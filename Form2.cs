@@ -215,7 +215,7 @@ namespace ReceteMain
             //her butonu kontrol edip tıklanmayan butonların rengini orijinaline çeviriyoruz.
             foreach (Button control in flowRecetePanel.Controls.OfType<Button>())
             {
-                if (control.Width > 130)
+                if (control.Width > 170)
                 {
                     control.BackColor = Color.CornflowerBlue;
                 }
@@ -268,7 +268,7 @@ namespace ReceteMain
                     anaPanel.Controls.Add(komutControl1);
                     btnKomut.Enabled = true;
                     btnBlok.Enabled = false;
-                    btnSil.Enabled = true; ;
+                    btnSil.Enabled = true; 
                     break;
 
                 case 48:
@@ -418,7 +418,6 @@ namespace ReceteMain
             yesilButtonuAc();
             flowuAktifYap(true);
             flowButtonOrderText();
-
         }
 
         public void flowRecetePanel_ControlRemoved(object sender, ControlEventArgs e)
@@ -427,7 +426,6 @@ namespace ReceteMain
             {
                 btnKomut.Enabled = false;
                 btnBlok.Enabled = true;
-                
             }
             //Toplam komut sayma işlemi
             int buttonCount = flowRecetePanel.Controls.OfType<Button>().Count();
@@ -435,7 +433,10 @@ namespace ReceteMain
             flowButtonOrderText();
         }
        
+        //Bir buttona tıklandığında renksıfırla() çalıştığı için o buttonun indexini alıp ona göre btn ekleme yapılabilir.
         public int yesilIndex { get; set; }
+
+        //Renkleri btn click çalıştığıdna boyutlarına göre ayrılır.
         public void renkSıfırla()
         {
             foreach (Button control in flowRecetePanel.Controls.OfType<Button>())
@@ -445,7 +446,7 @@ namespace ReceteMain
                     yesilIndex = flowRecetePanel.Controls.GetChildIndex(control);
 
                 }
-                if (control.Width > 130)
+                if (control.Width > 180)
                 {
                     control.BackColor = Color.CornflowerBlue;
 

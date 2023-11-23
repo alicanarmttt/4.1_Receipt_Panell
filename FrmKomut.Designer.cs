@@ -95,9 +95,9 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.panel2.Controls.Add(this.flowLayoutPanel1);
-            this.panel2.Location = new System.Drawing.Point(147, 3);
+            this.panel2.Location = new System.Drawing.Point(128, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(385, 471);
+            this.panel2.Size = new System.Drawing.Size(423, 471);
             this.panel2.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -108,7 +108,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(385, 471);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(423, 471);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // FrmKomut
