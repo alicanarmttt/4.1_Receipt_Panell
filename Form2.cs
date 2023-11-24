@@ -437,16 +437,19 @@ namespace ReceteMain
         public int yesilIndex { get; set; }
 
         //Renkleri btn click çalıştığıdna boyutlarına göre ayrılır.
-        public void renkSıfırla()
+        public int renkSıfırla()
         {
+            
             foreach (Button control in flowRecetePanel.Controls.OfType<Button>())
             {
+                //Yeşilse indexini kaydet
                 if (control.BackColor == Color.LightGreen)
                 {
+
                     yesilIndex = flowRecetePanel.Controls.GetChildIndex(control);
 
                 }
-                if (control.Width > 180)
+                if (control.Width > 174)
                 {
                     control.BackColor = Color.CornflowerBlue;
 
@@ -455,9 +458,44 @@ namespace ReceteMain
                 {
                     control.BackColor = SystemColors.InactiveCaption;
                 }
+               
             }
-
+            return yesilIndex;
         }
+        
+        public int YesılButtonTagıAl()
+        {
+            int yesilIndexTagı = -1;
+            for (int i = 0; i < flowRecetePanel.Controls.Count; i++)
+            {
+                //Yeşili bulduruyoruz.
+                if (flowRecetePanel.Controls[i].BackColor == Color.LightGreen)
+                {
+                    //Eğer yeşil olan Bloksa tagini direkt al. 
+                    if (Convert.ToInt32(flowRecetePanel.Controls[i].Tag) > 47)
+                    {
+                        yesilIndexTagı = Convert.ToInt32(flowRecetePanel.Controls[i].Tag);
+                        break;
+                    }
+
+                    //Eğer komutsa üstündeki komutu bulup tagini al. 
+                    else
+                    {
+                        //altbaşlık birden başlıyor çünkü blok bulunduğunda altBaslık arttırlmıyor 1 eksik kalıyor.
+                        int altBaslik = 0;
+                        //Blok komutunu bulana kadar üste çıkıyoruz ve altbaslık değeri bizim alt başlık sayımız oluyor.
+                        for (int a = 0; (Convert.ToInt32(flowRecetePanel.Controls[i - a].Tag) < 48); a++)
+                        {
+                            altBaslik++;
+                        }
+                        yesilIndexTagı = Convert.ToInt32(flowRecetePanel.Controls[i - altBaslik].Tag);
+                        break;
+                    }
+                }
+            }
+            return yesilIndexTagı;
+        }
+
         public void flowuAktifYap(bool aktiflik)
         {
             foreach (Control control in flowRecetePanel.Controls)

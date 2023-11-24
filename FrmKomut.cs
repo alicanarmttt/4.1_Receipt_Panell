@@ -120,10 +120,30 @@ namespace ReceteMain
             }
             //Tablodan komutları döngüyle oluşturuyoruz. 
 
-
-            //Oluşturulan Komut buttonlarını aktifliğine göre görüntülemek için.
-            SqlCommand kmt2 = new SqlCommand("select [Komut ID] from TblReceteFull where AKTİF=1", baglanti);
             baglanti.Open();
+            //Oluşturulan Komut buttonlarını aktifliğine göre görüntülemek için.
+            SqlCommand kmt2 = new SqlCommand("select [Komut ID] from TblReceteFull where AKTİF=1 AND ", baglanti);
+            Form2 frm2 = Form2.Instance;
+            int yesilButtonTag = frm2.YesılButtonTagıAl();
+
+            switch (yesilButtonTag)
+            {
+                case -1:
+                    MessageBox.Show("Yeşil button bulunamadı", "Hata");
+                    break;
+                case 48:
+                    kmt2.CommandText += "KONVANS =1";
+                    break;
+                case 49:
+                    kmt2.CommandText += "ECODRUM =1";
+                    break;
+                case 50:
+                    kmt2.CommandText += "[TAŞ YIKAMA] =1";
+                    break;
+                default:
+                    break;
+            }
+
             SqlDataReader rd2 = kmt2.ExecuteReader();
             
             while (rd2.Read())
