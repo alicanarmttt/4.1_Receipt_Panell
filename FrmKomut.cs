@@ -93,36 +93,9 @@ namespace ReceteMain
         private void FrmKomut_Load(object sender, EventArgs e)
         {
             
-            SqlCommand kmt1 = new SqlCommand("select * from TblReceteFull where [Komut ID]<48", baglanti);
-            baglanti.Open();
-            SqlDataReader rd1 = kmt1.ExecuteReader();
-            while(rd1.Read())
-            {
-                // Her bir kayıt için bir buton oluştur
-                Button button = new Button();
-                button.Text = rd1["Komut"].ToString(); // Buton adını veritabanından alınan değerle ayarla
-                button.Tag = rd1["Komut ID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
-                button.Size = new Size(145, 50);
-                button.BackColor= Color.White;
-                button.ForeColor = Color.Black;
-                button.Font = new Font("Microsoft Sans Serif", 10);
-                button.Click += button_Click;
-                flowLayoutPanel1.Controls.Add(button);
-            }
-            baglanti.Close();
-            flowLayoutPanel1.Controls[0].BackColor = Color.LightGreen;
-            secilenButonlar.Add((Button)flowLayoutPanel1.Controls[0]);
-
-            //başlangıçta her buttonun görünürlüğünü false ayarlıyoruz.
-            foreach (Button button in flowLayoutPanel1.Controls.OfType<Button>())
-            {
-                button.Visible = false;
-            }
-            //Tablodan komutları döngüyle oluşturuyoruz. 
 
             baglanti.Open();
-            //Oluşturulan Komut buttonlarını aktifliğine göre görüntülemek için.
-            SqlCommand kmt2 = new SqlCommand("select [Komut ID] from TblReceteFull where AKTİF=1 AND ", baglanti);
+            SqlCommand kmt2 = new SqlCommand("select * from TblReceteFull where AKTİF=1 AND ", baglanti);
             Form2 frm2 = Form2.Instance;
             int yesilButtonTag = frm2.YesılButtonTagıAl();
 
@@ -145,20 +118,23 @@ namespace ReceteMain
             }
 
             SqlDataReader rd2 = kmt2.ExecuteReader();
-            
             while (rd2.Read())
             {
-                int komutID = Convert.ToInt32(rd2["Komut ID"]);
-                
-                //button tagi var mı ya da tagiyle KomutID si eşleşiyor mu kontrol et.
-                Button targetButton = flowLayoutPanel1.Controls.OfType<Button>().FirstOrDefault(b => b.Tag != null && Convert.ToInt32(b.Tag) == komutID);
-
-                if (targetButton != null)
-                {
-                    // Butonun görünürlüğünü ayarla
-                    targetButton.Visible = true;
-                }
+                // Her bir kayıt için bir buton oluştur
+                Button button = new Button();
+                button.Text = rd2["Komut"].ToString(); // Buton adını veritabanından alınan değerle ayarla
+                button.Tag = rd2["Komut ID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
+                button.Size = new Size(145, 50);
+                button.BackColor = Color.White;
+                button.ForeColor = Color.Black;
+                button.Font = new Font("Microsoft Sans Serif", 10);
+                button.Click += button_Click;
+                flowLayoutPanel1.Controls.Add(button);
             }
+            baglanti.Close();
+            flowLayoutPanel1.Controls[0].BackColor = Color.LightGreen;
+            secilenButonlar.Add((Button)flowLayoutPanel1.Controls[0]);
+
             baglanti.Close();
         }
        
