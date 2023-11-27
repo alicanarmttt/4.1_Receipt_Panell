@@ -32,13 +32,13 @@ namespace ReceteMain.From_Controls
             try
             {
 
-                SqlCommand kmt = new SqlCommand("select komut from TblRecete where KomutID=@p1 ", baglanti);
+                SqlCommand kmt = new SqlCommand("select CommandName from TblKitap1 where CommandID=@p1 ", baglanti);
                 kmt.Parameters.AddWithValue("@p1", ID);
                 baglanti.Open();
                 SqlDataReader rd = kmt.ExecuteReader();
                 if (rd.Read())
                 {
-                    textBox1.Text = rd["komut"].ToString();
+                    textBox1.Text = rd["CommandName"].ToString();
                 }
                 baglanti.Close();
             }
@@ -47,6 +47,11 @@ namespace ReceteMain.From_Controls
 
                 throw;
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

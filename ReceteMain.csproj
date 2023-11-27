@@ -82,11 +82,23 @@
     <Compile Include="From Controls\BlokControl.Designer.cs">
       <DependentUpon>BlokControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="From Controls\Isitma.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="From Controls\Isitma.Designer.cs">
+      <DependentUpon>Isitma.cs</DependentUpon>
+    </Compile>
     <Compile Include="From Controls\KomutControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="From Controls\KomutControl1.Designer.cs">
       <DependentUpon>KomutControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="From Controls\Yikama.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="From Controls\Yikama.Designer.cs">
+      <DependentUpon>Yikama.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,8 +120,14 @@
     <EmbeddedResource Include="From Controls\BlokControl.resx">
       <DependentUpon>BlokControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="From Controls\Isitma.resx">
+      <DependentUpon>Isitma.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="From Controls\KomutControl1.resx">
       <DependentUpon>KomutControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="From Controls\Yikama.resx">
+      <DependentUpon>Yikama.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

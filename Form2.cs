@@ -243,9 +243,26 @@ namespace ReceteMain
                 case 16:
                 case 17:
                 case 18:
+                    btn.BackColor = Color.LightGreen;
+                    anaPanel.Controls.Clear();
+                    KomutControl1 komutControl2 = new KomutControl1(Convert.ToInt32(btn.Tag)); //UserControlü FrmKomut üzerindeki Tag==ID'sine göre çağırıyoruz.
+                    anaPanel.Controls.Add(komutControl2);
+                    btnKomut.Enabled = true;
+                    btnBlok.Enabled = false;
+                    btnSil.Enabled = true;
+                    break;
+
                 case 19:
                 case 20:
                 case 21:
+                    btn.BackColor = Color.LightGreen;
+                    anaPanel.Controls.Clear();
+                    Yikama yikama = new Yikama(Convert.ToInt32(btn.Tag)); //UserControlü FrmKomut üzerindeki Tag==ID'sine göre çağırıyoruz.
+                    anaPanel.Controls.Add(yikama);
+                    btnKomut.Enabled = true;
+                    btnBlok.Enabled = false;
+                    btnSil.Enabled = true;
+                    break;
                 case 22:
                 case 23:
                 case 24:
