@@ -94,15 +94,13 @@ namespace ReceteMain
             if (flowRecetePanel.Controls.OfType<Button>().Count() == 0)
             {
                 btnKomut.Enabled = false;
+                btnSil.Enabled = false;
             }
             else
             {
                 btnKomut.Enabled = true;
             }
-            if (flowRecetePanel.Controls.Count == 0)
-            {
-                btnSil.Enabled = false;
-            }
+            
         }
        
 
@@ -295,12 +293,9 @@ namespace ReceteMain
             FrmBlok frmb = new FrmBlok();
             FormGetir(frmb);
             UpdateButtonsEnabilityBlok(false);
-            foreach (Control control in flowRecetePanel.Controls)
-            {
-                control.Enabled = false;
-            }
+            flowuAktifYap(false);
             btnBlok.Enabled=false;
-            //btnIleri.Enabled = false;
+            
         }
 
         //KOMUT EKLE BUTONU
@@ -309,10 +304,7 @@ namespace ReceteMain
             FrmKomut frmk = new FrmKomut();
             FormGetir(frmk);
             UpdateButtonsEnability(false);
-            foreach (Control control in flowRecetePanel.Controls)
-            {
-                control.Enabled = false;
-            }
+            flowuAktifYap(false);
             btnKomut.Enabled = false;
             //btnIleri.Enabled = false;
         }

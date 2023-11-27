@@ -95,7 +95,7 @@ namespace ReceteMain
             
 
             baglanti.Open();
-            SqlCommand kmt2 = new SqlCommand("select * from TblReceteFull where AKTİF=1 AND ", baglanti);
+            SqlCommand kmt2 = new SqlCommand("select * from TblKitap1 where isActive=1 AND ", baglanti);
             Form2 frm2 = Form2.Instance;
             int yesilButtonTag = frm2.YesılButtonTagıAl();
 
@@ -105,13 +105,13 @@ namespace ReceteMain
                     MessageBox.Show("Yeşil button bulunamadı", "Hata");
                     break;
                 case 48:
-                    kmt2.CommandText += "KONVANS =1";
+                    kmt2.CommandText += "Konvans =1";
                     break;
                 case 49:
-                    kmt2.CommandText += "ECODRUM =1";
+                    kmt2.CommandText += "Ecodrum =1";
                     break;
                 case 50:
-                    kmt2.CommandText += "[TAŞ YIKAMA] =1";
+                    kmt2.CommandText += "[Taş] =1";
                     break;
                 default:
                     break;
@@ -122,8 +122,8 @@ namespace ReceteMain
             {
                 // Her bir kayıt için bir buton oluştur
                 Button button = new Button();
-                button.Text = rd2["Komut"].ToString(); // Buton adını veritabanından alınan değerle ayarla
-                button.Tag = rd2["Komut ID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
+                button.Text = rd2["CommandName"].ToString(); // Buton adını veritabanından alınan değerle ayarla
+                button.Tag = rd2["CommandID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
                 button.Size = new Size(145, 50);
                 button.BackColor = Color.White;
                 button.ForeColor = Color.Black;

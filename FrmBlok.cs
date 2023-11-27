@@ -33,33 +33,28 @@ namespace ReceteMain
             frm2.flowuAktifYap(true);
             this.Close();
             frm2.yesilButtonuAc();
-            
-
 
         }
         
         private void FrmBlok_Load(object sender, EventArgs e)
         {
             Form2 frm2 = Form2.Instance;
-            if(frm2.flowReceteCount()==0)
+            //Başlangıçta üste ekleme kapalı.
+            if (frm2.flowReceteCount()==0)
             {
                 btnUstEkle.Visible= false;
             }
-            
-            //Başlangıçta üste ekleme kapalı.
-
-            //btnUstEkle.Enabled = false;
 
             //Tablodan komutları döngüyle oluşturuyoruz. 
-            SqlCommand kmt1 = new SqlCommand("select * from TblReceteFull where [Komut ID] >47 and AKTİF=1", baglanti);
+            SqlCommand kmt1 = new SqlCommand("select * from TblKitap1 where [CommandID] >47 and isActive=1", baglanti);
             baglanti.Open();
             SqlDataReader rd1 = kmt1.ExecuteReader();
             while (rd1.Read())
             {
                 // Her bir kayıt için bir buton oluştur
                 Button button = new Button();
-                button.Text = rd1["Komut"].ToString(); // Buton adını veritabanından alınan değerle ayarla
-                button.Tag = rd1["Komut ID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
+                button.Text = rd1["CommandName"].ToString(); // Buton adını veritabanından alınan değerle ayarla
+                button.Tag = rd1["CommandID"]; // Butonun Tag özelliğini veritabanından alınan değerle ayarla,
                 button.Size = new Size(175, 50);
                 button.BackColor = Color.White;
                 button.ForeColor = Color.Black;
