@@ -148,5 +148,16 @@ namespace ReceteMain.From_Controls
 
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                panel1.Visible = false; 
+            }
+            else
+            {
+                panel1.Visible = true;
+            }
+        }
     }
 }
