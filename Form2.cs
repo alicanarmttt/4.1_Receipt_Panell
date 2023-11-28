@@ -248,6 +248,14 @@ namespace ReceteMain
                 case 13:
                 case 14:
                 case 15:
+                    btn.BackColor = Color.LightGreen;
+                    anaPanel.Controls.Clear();
+                    BuharIsitma buharIsitma = new BuharIsitma(Convert.ToInt32(btn.Tag)); //UserControlü FrmKomut üzerindeki Tag==ID'sine göre çağırıyoruz.
+                    anaPanel.Controls.Add(buharIsitma);
+                    btnKomut.Enabled = true;
+                    btnBlok.Enabled = false;
+                    btnSil.Enabled = true;
+                    break;
                 case 16:
                 case 17:
                 case 18:
@@ -278,6 +286,14 @@ namespace ReceteMain
                 case 26:
                 case 27:
                 case 28:
+                    btn.BackColor = Color.LightGreen;
+                    anaPanel.Controls.Clear();
+                    Sıkma sıkma = new Sıkma(Convert.ToInt32(btn.Tag)); //UserControlü FrmKomut üzerindeki Tag==ID'sine göre çağırıyoruz.
+                    anaPanel.Controls.Add(sıkma);
+                    btnKomut.Enabled = true;
+                    btnBlok.Enabled = false;
+                    btnSil.Enabled = true;
+                    break;
                 case 29:
                 case 30:
                 case 31:

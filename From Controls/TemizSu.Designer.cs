@@ -68,6 +68,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.txtOranliMiktar = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -150,6 +151,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.txtDevir);
             this.panel1.Controls.Add(this.txtDonus);
             this.panel1.Controls.Add(this.label13);
@@ -469,12 +471,22 @@
             // txtOranliMiktar
             // 
             this.txtOranliMiktar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtOranliMiktar.Location = new System.Drawing.Point(319, 208);
+            this.txtOranliMiktar.Location = new System.Drawing.Point(319, 172);
             this.txtOranliMiktar.Name = "txtOranliMiktar";
             this.txtOranliMiktar.Size = new System.Drawing.Size(88, 30);
             this.txtOranliMiktar.TabIndex = 62;
             this.txtOranliMiktar.Visible = false;
             this.txtOranliMiktar.Leave += new System.EventHandler(this.txtBox_LostFocus);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label14.Location = new System.Drawing.Point(361, 24);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(52, 25);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "Rpm";
             // 
             // TemizSu
             // 
@@ -553,5 +565,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TextBox txtOranliMiktar;
+        private System.Windows.Forms.Label label14;
     }
 }

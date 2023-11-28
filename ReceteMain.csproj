@@ -82,17 +82,23 @@
     <Compile Include="From Controls\BlokControl.Designer.cs">
       <DependentUpon>BlokControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="From Controls\Isitma.cs">
+    <Compile Include="From Controls\BuharIsitma.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="From Controls\Isitma.Designer.cs">
-      <DependentUpon>Isitma.cs</DependentUpon>
+    <Compile Include="From Controls\BuharIsitma.Designer.cs">
+      <DependentUpon>BuharIsitma.cs</DependentUpon>
     </Compile>
     <Compile Include="From Controls\KomutControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="From Controls\KomutControl1.Designer.cs">
       <DependentUpon>KomutControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="From Controls\Sıkma.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="From Controls\Sıkma.Designer.cs">
+      <DependentUpon>Sıkma.cs</DependentUpon>
     </Compile>
     <Compile Include="From Controls\TemizSu.cs">
       <SubType>UserControl</SubType>
@@ -126,11 +132,14 @@
     <EmbeddedResource Include="From Controls\BlokControl.resx">
       <DependentUpon>BlokControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="From Controls\Isitma.resx">
-      <DependentUpon>Isitma.cs</DependentUpon>
+    <EmbeddedResource Include="From Controls\BuharIsitma.resx">
+      <DependentUpon>BuharIsitma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="From Controls\KomutControl1.resx">
       <DependentUpon>KomutControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="From Controls\Sıkma.resx">
+      <DependentUpon>Sıkma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="From Controls\TemizSu.resx">
       <DependentUpon>TemizSu.cs</DependentUpon>
