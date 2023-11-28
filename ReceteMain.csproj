@@ -94,6 +94,12 @@
     <Compile Include="From Controls\KomutControl1.Designer.cs">
       <DependentUpon>KomutControl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="From Controls\TemizSu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="From Controls\TemizSu.Designer.cs">
+      <DependentUpon>TemizSu.cs</DependentUpon>
+    </Compile>
     <Compile Include="From Controls\Yikama.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="From Controls\KomutControl1.resx">
       <DependentUpon>KomutControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="From Controls\TemizSu.resx">
+      <DependentUpon>TemizSu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="From Controls\Yikama.resx">
       <DependentUpon>Yikama.cs</DependentUpon>

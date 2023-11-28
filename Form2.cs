@@ -230,6 +230,14 @@ namespace ReceteMain
                 case 3:
                 case 4:
                 case 5:
+                    btn.BackColor = Color.LightGreen;
+                    anaPanel.Controls.Clear();
+                    TemizSu temizSu = new TemizSu(Convert.ToInt32(btn.Tag)); //UserControlü FrmKomut üzerindeki Tag==ID'sine göre çağırıyoruz.
+                    anaPanel.Controls.Add(temizSu);
+                    btnKomut.Enabled = true;
+                    btnBlok.Enabled = false;
+                    btnSil.Enabled = true;
+                    break;
                 case 6:
                 case 7:
                 case 8:
