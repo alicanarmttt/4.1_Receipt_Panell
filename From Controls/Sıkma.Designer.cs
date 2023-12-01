@@ -109,6 +109,7 @@
             this.txtDevir.Name = "txtDevir";
             this.txtDevir.Size = new System.Drawing.Size(100, 30);
             this.txtDevir.TabIndex = 0;
+            this.txtDevir.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtDevir.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // txtDonus
@@ -118,6 +119,7 @@
             this.txtDonus.Name = "txtDonus";
             this.txtDonus.Size = new System.Drawing.Size(100, 30);
             this.txtDonus.TabIndex = 1;
+            this.txtDonus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtDonus.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // label13
@@ -197,6 +199,7 @@
             this.txtBekleme.Name = "txtBekleme";
             this.txtBekleme.Size = new System.Drawing.Size(100, 30);
             this.txtBekleme.TabIndex = 2;
+            this.txtBekleme.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtBekleme.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // label1
@@ -236,6 +239,7 @@
             this.txtSure.Name = "txtSure";
             this.txtSure.Size = new System.Drawing.Size(100, 30);
             this.txtSure.TabIndex = 34;
+            this.txtSure.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtSure.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // radioDonusYok

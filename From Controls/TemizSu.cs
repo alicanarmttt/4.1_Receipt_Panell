@@ -108,7 +108,7 @@ namespace ReceteMain.From_Controls
         }
         private void txtBox_LostFocus(object sender, EventArgs e)
         {
-            TextBox textBox = sender as TextBox;
+            System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
 
             if (textBox != null)
             {
@@ -214,7 +214,19 @@ namespace ReceteMain.From_Controls
 
 
         }
-
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Eğer basılan tuş bir sayı değilse ve bir kontrol tuşu (Ctrl, Shift, vb.) değilse
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Girişi engelle
+                e.Handled = true;
+            }
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(","))
+            {
+                e.Handled = true;
+            }
+        }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
 

@@ -69,7 +69,7 @@
             this.txtSure.Name = "txtSure";
             this.txtSure.Size = new System.Drawing.Size(100, 30);
             this.txtSure.TabIndex = 3;
-            this.txtSure.TextChanged += new System.EventHandler(this.txtSure_TextChanged);
+            this.txtSure.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtSure.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // txtSıcaklık
@@ -79,6 +79,8 @@
             this.txtSıcaklık.Name = "txtSıcaklık";
             this.txtSıcaklık.Size = new System.Drawing.Size(100, 30);
             this.txtSıcaklık.TabIndex = 4;
+            this.txtSıcaklık.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.txtSıcaklık.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtSıcaklık.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // lblSure
@@ -198,6 +200,8 @@
             this.txtBekleme.Name = "txtBekleme";
             this.txtBekleme.Size = new System.Drawing.Size(100, 30);
             this.txtBekleme.TabIndex = 2;
+            this.txtBekleme.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.txtBekleme.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtBekleme.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // label13
@@ -217,6 +221,8 @@
             this.txtDonus.Name = "txtDonus";
             this.txtDonus.Size = new System.Drawing.Size(100, 30);
             this.txtDonus.TabIndex = 1;
+            this.txtDonus.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.txtDonus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtDonus.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // txtDevir
@@ -226,6 +232,7 @@
             this.txtDevir.Name = "txtDevir";
             this.txtDevir.Size = new System.Drawing.Size(100, 30);
             this.txtDevir.TabIndex = 0;
+            this.txtDevir.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtDevir.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // panel1

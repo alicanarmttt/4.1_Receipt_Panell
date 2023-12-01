@@ -70,6 +70,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtOranliMiktar = new System.Windows.Forms.TextBox();
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -82,6 +85,7 @@
             this.txtDevir.Name = "txtDevir";
             this.txtDevir.Size = new System.Drawing.Size(100, 30);
             this.txtDevir.TabIndex = 0;
+            this.txtDevir.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtDevir.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // txtDonus
@@ -91,6 +95,7 @@
             this.txtDonus.Name = "txtDonus";
             this.txtDonus.Size = new System.Drawing.Size(100, 30);
             this.txtDonus.TabIndex = 1;
+            this.txtDonus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtDonus.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // label13
@@ -110,6 +115,7 @@
             this.txtBekleme.Name = "txtBekleme";
             this.txtBekleme.Size = new System.Drawing.Size(100, 30);
             this.txtBekleme.TabIndex = 2;
+            this.txtBekleme.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtBekleme.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // label1
@@ -152,14 +158,17 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.txtDevir);
             this.panel1.Controls.Add(this.txtDonus);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.txtBekleme);
+            this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Location = new System.Drawing.Point(178, 360);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(502, 116);
@@ -202,6 +211,7 @@
             this.txtSıcaklık.Name = "txtSıcaklık";
             this.txtSıcaklık.Size = new System.Drawing.Size(100, 30);
             this.txtSıcaklık.TabIndex = 27;
+            this.txtSıcaklık.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtSıcaklık.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // txtSure
@@ -211,6 +221,7 @@
             this.txtSure.Name = "txtSure";
             this.txtSure.Size = new System.Drawing.Size(100, 30);
             this.txtSure.TabIndex = 26;
+            this.txtSure.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtSure.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // label16
@@ -260,6 +271,7 @@
             this.txtYuk.Size = new System.Drawing.Size(88, 30);
             this.txtYuk.TabIndex = 53;
             this.txtYuk.Visible = false;
+            this.txtYuk.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtYuk.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // label19
@@ -487,7 +499,37 @@
             this.txtOranliMiktar.Size = new System.Drawing.Size(88, 30);
             this.txtOranliMiktar.TabIndex = 62;
             this.txtOranliMiktar.Visible = false;
+            this.txtOranliMiktar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtOranliMiktar.Leave += new System.EventHandler(this.txtBox_LostFocus);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox1.Location = new System.Drawing.Point(214, -274);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 30);
+            this.textBox1.TabIndex = 26;
+            this.textBox1.Leave += new System.EventHandler(this.txtBox_LostFocus);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox2.Location = new System.Drawing.Point(245, -155);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(88, 30);
+            this.textBox2.TabIndex = 53;
+            this.textBox2.Visible = false;
+            this.textBox2.Leave += new System.EventHandler(this.txtBox_LostFocus);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox3.Location = new System.Drawing.Point(119, -157);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(88, 30);
+            this.textBox3.TabIndex = 62;
+            this.textBox3.Visible = false;
+            this.textBox3.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // TemizSu
             // 
@@ -567,5 +609,8 @@
         private System.Windows.Forms.TextBox txtOranliMiktar;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

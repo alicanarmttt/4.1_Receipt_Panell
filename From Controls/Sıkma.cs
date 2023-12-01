@@ -80,7 +80,7 @@ namespace ReceteMain.From_Controls
         }
         private void txtBox_LostFocus(object sender, EventArgs e)
         {
-            TextBox textBox = sender as TextBox;
+            System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
 
             if (textBox != null)
             {
@@ -117,7 +117,7 @@ namespace ReceteMain.From_Controls
                             if (value < minBeklemeSure || value > maxBeklemeSure)
                             {
                                 //MessageBox.Show(minBeklemeSure + " ile " + maxBeklemeSure + " arasında bir sayı giriniz.");
-                                toolTip2.Show($"Geçersiz değer! {minBeklemeSure} ile {maxBeklemeSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
+                                toolTip1.Show($"Geçersiz değer! {minBeklemeSure} ile {maxBeklemeSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
                                 textBox.Text = defaultBeklemeSure.ToString();
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
@@ -127,7 +127,7 @@ namespace ReceteMain.From_Controls
                             if (value < minSureDK || value > maxSureDK)
                             {
                                 //MessageBox.Show(minSureDK + " ile " + maxSureDK + " arasında bir sayı giriniz.");
-                                toolTip2.Show($"Geçersiz değer! {minSureDK} ile {maxSureDK} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
+                                toolTip1.Show($"Geçersiz değer! {minSureDK} ile {maxSureDK} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
                                 textBox.Text = defaultSureDK.ToString();
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
@@ -147,7 +147,19 @@ namespace ReceteMain.From_Controls
         }
 
 
-
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Eğer basılan tuş bir sayı değilse ve bir kontrol tuşu (Ctrl, Shift, vb.) değilse
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Girişi engelle
+                e.Handled = true;
+            }
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(","))
+            {
+                e.Handled = true;
+            }
+        }
         private void radioDonusYok_CheckedChanged(object sender, EventArgs e)
         {
             if (radioDonusYok.Checked)

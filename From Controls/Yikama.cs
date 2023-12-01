@@ -155,10 +155,22 @@ namespace ReceteMain.From_Controls
                 }
             }
 
-
         }
 
-      
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Eğer basılan tuş bir sayı değilse ve bir kontrol tuşu (Ctrl, Shift, vb.) değilse
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Girişi engelle
+                e.Handled = true;
+            }
+            if (e.KeyChar == ',' && (sender as TextBox).Text.Contains(","))
+            {
+                e.Handled = true;
+            }
+
+        }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioDonusYok.Checked)
@@ -170,10 +182,20 @@ namespace ReceteMain.From_Controls
                 panel1.Visible = true;
             }
         }
-
-        private void txtSure_TextChanged(object sender, EventArgs e)
+        private void textBox_TextChanged(object sender, EventArgs e)
         {
+            TextBox textBox = sender as TextBox;
 
+            if (textBox != null)
+            {
+                // TextBox'tan alınan değeri kontrol et
+                if (int.TryParse(textBox.Text, out int value))
+                {
+                    // Değer uygunsa, ondalık formata çevir ve TextBox'a geri yaz
+                    textBox.Text = value.ToString("0.0");
+                }
+            }
         }
+        
     }
 }
