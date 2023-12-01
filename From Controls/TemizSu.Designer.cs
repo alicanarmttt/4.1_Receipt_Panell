@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtDevir = new System.Windows.Forms.TextBox();
             this.txtDonus = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSıcaklık = new System.Windows.Forms.TextBox();
@@ -66,9 +68,8 @@
             this.label21 = new System.Windows.Forms.Label();
             this.radioButton8 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.txtOranliMiktar = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -163,6 +164,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(502, 116);
             this.panel1.TabIndex = 43;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label14.Location = new System.Drawing.Point(361, 24);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(52, 25);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "Rpm";
             // 
             // label5
             // 
@@ -478,16 +489,6 @@
             this.txtOranliMiktar.Visible = false;
             this.txtOranliMiktar.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label14.Location = new System.Drawing.Point(361, 24);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(52, 25);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "Rpm";
-            // 
             // TemizSu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -563,8 +564,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.RadioButton radioButton8;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TextBox txtOranliMiktar;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ToolTip toolTip2;
     }
 }

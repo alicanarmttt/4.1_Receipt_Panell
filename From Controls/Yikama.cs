@@ -49,7 +49,6 @@ namespace ReceteMain.From_Controls
             SqlDataReader rd = cmd.ExecuteReader();
             while (rd.Read())
             {
-                
                 txtDevir.Text = rd["defaultDevir"].ToString();
                 txtDonus.Text = rd["defaultDonusSure"].ToString();
                 txtBekleme.Text = rd["defaultBeklemeSure"].ToString();
@@ -74,6 +73,12 @@ namespace ReceteMain.From_Controls
                  maxSicaklik = Convert.ToInt32(rd["maxSicaklik"]);
             }
             baglanti.Close();
+
+            //tooltip1 özellikleri
+            toolTip1.ToolTipIcon = ToolTipIcon.Error;
+            toolTip1.ToolTipTitle = "Hata!";
+            toolTip1.AutomaticDelay = 200;
+            toolTip1.AutoPopDelay = 3000;
         }
         private void txtBox_LostFocus(object sender, EventArgs e)
         {
@@ -92,7 +97,8 @@ namespace ReceteMain.From_Controls
                         case "txtDevir":
                             if ( value < minDevir || value > maxDevir)
                             {
-                                MessageBox.Show(minDevir+" ile " + maxDevir + " arasında bir sayı giriniz.");
+                                //MessageBox.Show(minDevir+" ile " + maxDevir + " arasında bir sayı giriniz.");
+                                toolTip1.Show($"Geçersiz değer! {minDevir} ile {maxDevir} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
                                 textBox.Text = defaultDevir.ToString(); 
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
@@ -101,17 +107,18 @@ namespace ReceteMain.From_Controls
                         case "txtDonus":
                             if (value < minDonusSure || value > maxDonusSure)
                             {
-                                MessageBox.Show(minDonusSure + " ile " + maxDonusSure + " arasında bir sayı giriniz.");
+                                //MessageBox.Show(minDonusSure + " ile " + maxDonusSure + " arasında bir sayı giriniz.");
+                                toolTip1.Show($"Geçersiz değer! {minDonusSure} ile {maxDonusSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
                                 textBox.Text = defaultDonusSure.ToString();
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
-                            
                             break;
 
                         case "txtBekleme":
                             if (value < minBeklemeSure || value > maxBeklemeSure)
                             {
-                                MessageBox.Show(minBeklemeSure + " ile " + maxBeklemeSure + " arasında bir sayı giriniz.");
+                                //MessageBox.Show(minBeklemeSure + " ile " + maxBeklemeSure + " arasında bir sayı giriniz.");
+                                toolTip1.Show($"Geçersiz değer! {minBeklemeSure} ile {maxBeklemeSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
                                 textBox.Text = defaultBeklemeSure.ToString();
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
@@ -120,7 +127,8 @@ namespace ReceteMain.From_Controls
                         case "txtSure":
                             if (value < minSureDK || value > maxSureDK)
                             {
-                                MessageBox.Show(minSureDK + " ile " + maxSureDK + " arasında bir sayı giriniz.");
+                                //MessageBox.Show(minSureDK + " ile " + maxSureDK + " arasında bir sayı giriniz.");
+                                toolTip1.Show($"Geçersiz değer! {minSureDK} ile {maxSureDK} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
                                 textBox.Text = defaultSureDK.ToString();
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
@@ -129,7 +137,8 @@ namespace ReceteMain.From_Controls
                         case "txtSıcaklık":
                             if ( value > maxSicaklik)
                             {
-                                MessageBox.Show(maxSicaklik + "'dan az bir sayı giriniz.");
+                                //MessageBox.Show(maxSicaklik + "'dan az bir sayı giriniz.");
+                                toolTip1.Show($"Geçersiz değer! {maxSicaklik}'dan az bir sayı giriniz.", textBox, 0, -30, 3000);
                                 textBox.Text = defaultSicaklik.ToString();
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
@@ -150,7 +159,6 @@ namespace ReceteMain.From_Controls
         }
 
       
-
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioDonusYok.Checked)
@@ -161,6 +169,11 @@ namespace ReceteMain.From_Controls
             {
                 panel1.Visible = true;
             }
+        }
+
+        private void txtSure_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

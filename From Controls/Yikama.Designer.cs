@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtSure = new System.Windows.Forms.TextBox();
             this.txtSıcaklık = new System.Windows.Forms.TextBox();
             this.lblSure = new System.Windows.Forms.Label();
@@ -46,6 +47,7 @@
             this.txtDonus = new System.Windows.Forms.TextBox();
             this.txtDevir = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.radioDonusYok = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -54,8 +56,8 @@
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblDonusTip = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -67,6 +69,7 @@
             this.txtSure.Name = "txtSure";
             this.txtSure.Size = new System.Drawing.Size(100, 30);
             this.txtSure.TabIndex = 3;
+            this.txtSure.TextChanged += new System.EventHandler(this.txtSure_TextChanged);
             this.txtSure.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // txtSıcaklık
@@ -241,6 +244,16 @@
             this.panel1.Size = new System.Drawing.Size(502, 116);
             this.panel1.TabIndex = 24;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Location = new System.Drawing.Point(361, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 25);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Rpm";
+            // 
             // radioDonusYok
             // 
             this.radioDonusYok.AutoSize = true;
@@ -333,16 +346,6 @@
             this.lblDonusTip.TabIndex = 33;
             this.lblDonusTip.Text = "Dönüş Tipi:";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(361, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 25);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "Rpm";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -408,5 +411,6 @@
         private System.Windows.Forms.Label lblDonusTip;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
