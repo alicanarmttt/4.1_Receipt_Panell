@@ -17,6 +17,7 @@ namespace ReceteMain.From_Controls
 
         //Bağlantı kur.
         SqlConnection baglanti = new SqlConnection(@"Data Source=D15\SQLEXPRESS;Initial Catalog=Recete;Integrated Security=True");
+        //Başka eventlerde kullanılacağı için double değişkenleri tanımla..
         private int defaultDevir;
         private double defaultDonusSure;
         private double defaultBeklemeSure;
@@ -50,7 +51,7 @@ namespace ReceteMain.From_Controls
             SqlDataReader rd = cmd.ExecuteReader();
             while (rd.Read())
             {
-                
+                //Geçici double yardımıyla 10 a böl. Textbox'a yaz.
                 txtDevir.Text = rd["defaultDevir"].ToString();
 
                 double defdonus = (double)rd["defaultDonusSure"];
@@ -62,7 +63,7 @@ namespace ReceteMain.From_Controls
                 double defsicaklik = (double)rd["defaultSicaklik"];
                 txtSıcaklık.Text = (defsicaklik / 10.0).ToString();
 
-                //Textdeki virgülden kurtulup defaultlarını düzenledik. 
+                //Texte eklenen defaultlarını döngü dışına çıkarabilmek için kaydettik.  
                 //Eğer geçersiz aralıkta ise defaultlarını kullanarak eski haline getireceğiz çünkü.
 
                 defaultDevir = int.Parse(txtDevir.Text);
@@ -70,20 +71,23 @@ namespace ReceteMain.From_Controls
                 defaultBeklemeSure = double.Parse(txtBekleme.Text);
                 defaultSicaklik = double.Parse(txtSıcaklık.Text);
 
-                if (!txtDonus.Text.Contains(","))
+                //Eğer 15 geldiyse textte .0 ekliyoruz.
+                if (!txtDonus.Text.Contains("."))
                 {
                     txtDonus.Text += ".0";
                 }
 
-                if (!txtBekleme.Text.Contains(","))
+                if (!txtBekleme.Text.Contains("."))
                 {
                     txtBekleme.Text += ".0";
                 }
 
-                if (!txtSıcaklık.Text.Contains(","))
+                if (!txtSıcaklık.Text.Contains("."))
                 {
                     txtSıcaklık.Text += ".0";
                 }
+
+                //min-max değerlerini de burada dolduruyoruz.
 
                 minDevir = Convert.ToInt32(rd["minDevir"]);
                 maxDevir = Convert.ToInt32(rd["maxDevir"]);
@@ -92,18 +96,21 @@ namespace ReceteMain.From_Controls
                 minBeklemeSure = Convert.ToInt32(rd["minBeklemeSure"]);
                 maxBeklemeSure = Convert.ToInt32(rd["maxBeklemeSure"]);
                 maxSicaklik = Convert.ToInt32(rd["maxSicaklik"]);  
+
             }
+            //Tooptipin özelliklerini ayarlıyoruz.
             baglanti.Close();
             toolTip1.ToolTipTitle = "Hata!";
             toolTip1.ToolTipIcon = ToolTipIcon.Error;
             toolTip1.AutoPopDelay = 3000;
             toolTip1.AutomaticDelay = 200;
         }
-        //Veri girilip başka bir textboxa geçince kontrol ediyoruz
+        //Veri girilip başka bir textboxa geçince tetikleniyor ve textbox'u kontrol ediyoruz.
         private void txtBox_LostFocus(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
-            //Virgül varsa
+            //Virgül varsa nasıl düzenleyeceğiz.
+
             if (textBox.Text.Contains("."))
             {
                 int index = textBox.Text.IndexOf(".");
@@ -112,7 +119,7 @@ namespace ReceteMain.From_Controls
                 {
                     textBox.Text = textBox.Text;
                 }
-                //Eğer XY, -> XY,0
+                //Eğer XY, -> XY,0  
                 if (textBox.Text.EndsWith("."))
                 {
                     textBox.Text = textBox.Text.ToString() + "0";
@@ -124,12 +131,16 @@ namespace ReceteMain.From_Controls
                 }
 
             }
-            //Eğer virgül yoksa
+            //Eğer virgül yoksa nasıl düzenleyeceğiz.
+
             else if(!textBox.Text.Contains("."))
             {
                 textBox.Text = textBox.Text.ToString() + ".0";
             }
 
+
+            //Hangi textboxu doldurmayı bitirdiysek. Formatı harici min maxlarına göre sınırlarını kontrol etmeliyiz.
+            //Tooltip ile de kullanıcıya bildirip default değerleri geri döndürüyoruz.
             if (textBox != null)
             {
 
@@ -193,6 +204,7 @@ namespace ReceteMain.From_Controls
 
 
         }
+        //Devir integer şeklinde gözükecek.
         private void txtBox_LostFocusTam(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;

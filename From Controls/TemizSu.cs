@@ -16,6 +16,8 @@ namespace ReceteMain.From_Controls
     {
         //Bağlantı kur.
         SqlConnection baglanti = new SqlConnection(@"Data Source=D15\SQLEXPRESS;Initial Catalog=Recete;Integrated Security=True");
+
+        //Başka eventlerde kullanılacağı için double değişkenleri tanımla.
         private int defaultDevir;
         private double defaultDonusSure;
         private double defaultBeklemeSure;
@@ -62,7 +64,7 @@ namespace ReceteMain.From_Controls
             SqlDataReader rd = cmd.ExecuteReader();
             while (rd.Read())
             {
-                
+                //Geçici double yardımıyla 10 a böl. Textbox'a yaz.
                 txtDevir.Text = rd["defaultDevir"].ToString();
 
                 double defdonus = (double)rd["defaultDonusSure"];
@@ -86,6 +88,9 @@ namespace ReceteMain.From_Controls
                 double deforanlimiktar = (double)rd["defaultSicaklik"];
                 txtOranliMiktar.Text = (deforanlimiktar / 10.0).ToString();
 
+                //Texte eklenen defaultlarını döngü dışına çıkarabilmek için kaydettik.  
+                //Eğer geçersiz aralıkta ise defaultlarını kullanarak eski haline getireceğiz çünkü.
+
                 defaultDevir = int.Parse(txtDevir.Text);
                 defaultDonusSure = double.Parse(txtDonus.Text);
                 defaultBeklemeSure = double.Parse(txtBekleme.Text);
@@ -95,39 +100,41 @@ namespace ReceteMain.From_Controls
                 defaultOranliYuk = double.Parse(txtYuk.Text);
                 defaultOranliMiktar = double.Parse(txtOranliMiktar.Text);
 
-                if (!txtDonus.Text.Contains(","))
+                //Eğer 15 geldiyse textte .0 ekliyoruz.
+                if (!txtDonus.Text.Contains("."))
                 {
                     txtDonus.Text += ".0";
                 }
 
-                if (!txtBekleme.Text.Contains(","))
+                if (!txtBekleme.Text.Contains("."))
                 {
                     txtBekleme.Text += ".0";
                 }
 
-                if (!txtSıcaklık.Text.Contains(","))
+                if (!txtSıcaklık.Text.Contains("."))
                 {
                     txtSıcaklık.Text += ".0";
                 }
-                if (!txtSure.Text.Contains(","))
+                if (!txtSure.Text.Contains("."))
                 {
                     txtSure.Text += ".0";
                 }
 
-                if (!txtMiktar.Text.Contains(","))
+                if (!txtMiktar.Text.Contains("."))
                 {
                     txtMiktar.Text += ".0";
                 }
 
-                if (!txtYuk.Text.Contains(","))
+                if (!txtYuk.Text.Contains("."))
                 {
                     txtYuk.Text += ".0";
                 }
-                if (!txtOranliMiktar.Text.Contains(","))
+                if (!txtOranliMiktar.Text.Contains("."))
                 {
                     txtOranliMiktar.Text += ".0";
                 }
 
+                //min-max değerlerini de burada dolduruyoruz.
                 minDevir = Convert.ToInt32(rd["minDevir"]);
                 maxDevir = Convert.ToInt32(rd["maxDevir"]);
                 minDonusSure = Convert.ToInt32(rd["minDonusSure"]);
@@ -147,12 +154,13 @@ namespace ReceteMain.From_Controls
             }
             baglanti.Close();
 
-            //tooltip1 özellikleri
+            //Tooptipin özelliklerini ayarlıyoruz.
             toolTip2.ToolTipIcon = ToolTipIcon.Error;
             toolTip2.ToolTipTitle = "Hata!";
             toolTip2.AutomaticDelay = 200;
             toolTip2.AutoPopDelay = 3000;
         }
+        //Veri girilip başka bir textboxa geçince tetikleniyor ve textbox'u kontrol ediyoruz.
         private void txtBox_LostFocus(object sender, EventArgs e)
         {
             System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
@@ -182,7 +190,8 @@ namespace ReceteMain.From_Controls
             {
                 textBox.Text = textBox.Text.ToString() + ".0";
             }
-
+            //Hangi textboxu doldurmayı bitirdiysek. Formatı harici min maxlarına göre sınırlarını kontrol etmeliyiz.
+            //Tooltip ile de kullanıcıya bildirip default değerleri geri döndürüyoruz.
             if (textBox != null)
             {
                 double value;
@@ -287,6 +296,7 @@ namespace ReceteMain.From_Controls
 
 
         }
+        //Devir integer şeklinde gözükecek.
         private void txtBox_LostFocusTam(object sender, EventArgs e)
         {
             System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
@@ -316,15 +326,28 @@ namespace ReceteMain.From_Controls
         }
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //silme işlemi çalışabilsin.
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+                return;
+            }
+
             // Eğer basılan tuş bir sayı değilse ve bir kontrol tuşu (Ctrl, Shift, vb.) değilse
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !(e.KeyChar == '.'))
             {
                 // Girişi engelle
                 e.Handled = true;
+                return;
             }
-            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(","))
+            //Eğer tuş virgülse ve virgül metinde bulunuyorsa, ya da bir rakamsa ve virgül bulunuyorsa Sadece 1, basamak eklenebilsin.
+            if (((e.KeyChar == '.') && (sender as System.Windows.Forms.TextBox).Text.Contains(".")) || (char.IsDigit(e.KeyChar) && (sender as System.Windows.Forms.TextBox).Text.Contains(".")))
             {
-                e.Handled = true;
+                int index = (sender as System.Windows.Forms.TextBox).Text.IndexOf(".");
+                if (((sender as System.Windows.Forms.TextBox).Text.Length - 1) - index >= 1)
+                {
+                    e.Handled = true;
+                }
             }
         }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
