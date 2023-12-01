@@ -17,30 +17,30 @@ namespace ReceteMain.From_Controls
         //Bağlantı kur.
         SqlConnection baglanti = new SqlConnection(@"Data Source=D15\SQLEXPRESS;Initial Catalog=Recete;Integrated Security=True");
         private int defaultDevir;
-        private int defaultDonusSure;
-        private int defaultBeklemeSure;
-        private int defaultSureDK;
-        private int defaultSicaklik;
-        private int defaultMiktar;
-        private int defaultOranliYuk;
-        private int defaultOranliMiktar;
+        private double defaultDonusSure;
+        private double defaultBeklemeSure;
+        private double defaultSureDK;
+        private double defaultSicaklik;
+        private double defaultMiktar;
+        private double defaultOranliYuk;
+        private double defaultOranliMiktar;
 
         private int minDevir;
         private int maxDevir;
-        private int minDonusSure;
-        private int maxDonusSure;
-        private int minBeklemeSure;
-        private int maxBeklemeSure;
-        private int minSureDK;
-        private int maxSureDK;
-        private int maxSureSn;
-        private int maxSicaklik;
-        private int minSabitMiktar;
-        private int maxSabitMiktar;
-        private int maxOranliMiktar;
-        private int minOranliMiktar;
-        private int minOranliYuk;
-        private int maxOranliYuk;
+        private double minDonusSure;
+        private double maxDonusSure;
+        private double minBeklemeSure;
+        private double maxBeklemeSure;
+        private double minSureDK;
+        private double maxSureDK;
+        private double maxSureSn;
+        private double maxSicaklik;
+        private double minSabitMiktar;
+        private double maxSabitMiktar;
+        private double maxOranliMiktar;
+        private double minOranliMiktar;
+        private double minOranliYuk;
+        private double maxOranliYuk;
 
         //ID yi dışarıdan almak için yaratıyoruz.
         public int ID { get; set; }
@@ -64,22 +64,69 @@ namespace ReceteMain.From_Controls
             {
                 
                 txtDevir.Text = rd["defaultDevir"].ToString();
-                txtDonus.Text = rd["defaultDonusSure"].ToString();
-                txtBekleme.Text = rd["defaultBeklemeSure"].ToString();
-                txtSure.Text = rd["defaultSureDK"].ToString();
-                txtSıcaklık.Text = rd["defaultSicaklik"].ToString();
-                txtMiktar.Text = rd["defaultSabitMiktar"].ToString();
-                txtYuk.Text = rd["defaultOranliYuk"].ToString();
-                txtOranliMiktar.Text = rd["defaultOranliMiktar"].ToString();
+
+                double defdonus = (double)rd["defaultDonusSure"];
+                txtDonus.Text = (defdonus / 10.0).ToString();
+
+                double defbekleme = (double)rd["defaultBeklemeSure"];
+                txtBekleme.Text = (defbekleme / 10.0).ToString();
+
+                double defsicaklik = (double)rd["defaultSicaklik"];
+                txtSıcaklık.Text = (defsicaklik / 10.0).ToString();
+
+                double defsure = (double)rd["defaultSicaklik"];
+                txtSure.Text = (defsure / 10.0).ToString();
+
+                double defmiktar = (double)rd["defaultSicaklik"];
+                txtMiktar.Text = (defmiktar / 10.0).ToString();
+
+                double defyuk = (double)rd["defaultSicaklik"];
+                txtYuk.Text = (defyuk / 10.0).ToString();
+
+                double deforanlimiktar = (double)rd["defaultSicaklik"];
+                txtOranliMiktar.Text = (deforanlimiktar / 10.0).ToString();
 
                 defaultDevir = int.Parse(txtDevir.Text);
-                defaultDonusSure = int.Parse(txtDonus.Text);
-                defaultBeklemeSure = int.Parse(txtBekleme.Text);
-                defaultSureDK = int.Parse(txtSure.Text);
-                defaultSicaklik = int.Parse(txtSıcaklık.Text);
-                defaultMiktar = int.Parse(txtMiktar.Text);
-                defaultOranliYuk = int.Parse(txtYuk.Text);
-                defaultOranliMiktar = int.Parse(txtOranliMiktar.Text);
+                defaultDonusSure = double.Parse(txtDonus.Text);
+                defaultBeklemeSure = double.Parse(txtBekleme.Text);
+                defaultSureDK = double.Parse(txtSure.Text);
+                defaultSicaklik = double.Parse(txtSıcaklık.Text);
+                defaultMiktar = double.Parse(txtMiktar.Text);
+                defaultOranliYuk = double.Parse(txtYuk.Text);
+                defaultOranliMiktar = double.Parse(txtOranliMiktar.Text);
+
+                if (!txtDonus.Text.Contains(","))
+                {
+                    txtDonus.Text += ".0";
+                }
+
+                if (!txtBekleme.Text.Contains(","))
+                {
+                    txtBekleme.Text += ".0";
+                }
+
+                if (!txtSıcaklık.Text.Contains(","))
+                {
+                    txtSıcaklık.Text += ".0";
+                }
+                if (!txtSure.Text.Contains(","))
+                {
+                    txtSure.Text += ".0";
+                }
+
+                if (!txtMiktar.Text.Contains(","))
+                {
+                    txtMiktar.Text += ".0";
+                }
+
+                if (!txtYuk.Text.Contains(","))
+                {
+                    txtYuk.Text += ".0";
+                }
+                if (!txtOranliMiktar.Text.Contains(","))
+                {
+                    txtOranliMiktar.Text += ".0";
+                }
 
                 minDevir = Convert.ToInt32(rd["minDevir"]);
                 maxDevir = Convert.ToInt32(rd["maxDevir"]);
@@ -109,33 +156,59 @@ namespace ReceteMain.From_Controls
         private void txtBox_LostFocus(object sender, EventArgs e)
         {
             System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
+            //Virgül varsa
+            if (textBox.Text.Contains("."))
+            {
+                int index = textBox.Text.IndexOf(".");
+                //Eğer XY,0 -> XY,0
+                if (textBox.Text.EndsWith("0"))
+                {
+                    textBox.Text = textBox.Text;
+                }
+                //Eğer XY, -> XY,0
+                if (textBox.Text.EndsWith("."))
+                {
+                    textBox.Text = textBox.Text.ToString() + "0";
+                }
+                //Eğer XY,Z -> XY,Z
+                if (char.IsDigit(textBox.Text[textBox.Text.Length - 1]))
+                {
+                    textBox.Text = textBox.Text;
+                }
+
+            }
+            //Eğer virgül yoksa
+            else if (!textBox.Text.Contains("."))
+            {
+                textBox.Text = textBox.Text.ToString() + ".0";
+            }
 
             if (textBox != null)
             {
-                decimal value;
+                double value;
 
-                if (decimal.TryParse(textBox.Text, out value))
+                if (double.TryParse(textBox.Text, out value))
                 {
                     // TextBox'tan alınan değer başarıyla bir decimal değere dönüştürüldü
 
                     switch (textBox.Name)
                     {
-                        case "txtDevir":
-                            if (value < minDevir || value > maxDevir)
-                            {
-                                //MessageBox.Show(minDevir + " ile " + maxDevir + " arasında bir sayı giriniz.");
-                                toolTip2.Show($"Geçersiz değer! {minDevir} ile {maxDevir} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
-                                textBox.Text = defaultDevir.ToString();
-                                textBox.Focus(); // Odaklanmayı geri getir
-                            }
-                            break;
+                        //case "txtDevir":
+                        //    if (value < minDevir || value > maxDevir)
+                        //    {
+                        //        //MessageBox.Show(minDevir + " ile " + maxDevir + " arasında bir sayı giriniz.");
+                        //        toolTip2.Show($"Geçersiz değer! {minDevir} ile {maxDevir} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
+                        //        textBox.Text = defaultDevir.ToString();
+                        //        textBox.Focus(); // Odaklanmayı geri getir
+                        //    }
+                        //    break;
 
                         case "txtDonus":
                             if (value < minDonusSure || value > maxDonusSure)
                             {
                                 //MessageBox.Show(minDonusSure + " ile " + maxDonusSure + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minDonusSure} ile {maxDonusSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
-                                textBox.Text = defaultDonusSure.ToString();
+                                textBox.Text = defaultDonusSure.ToString() + ".0".ToString(); ;
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
 
@@ -146,7 +219,7 @@ namespace ReceteMain.From_Controls
                             {
                                 //MessageBox.Show(minBeklemeSure + " ile " + maxBeklemeSure + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minBeklemeSure} ile {maxBeklemeSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
-                                textBox.Text = defaultBeklemeSure.ToString();
+                                textBox.Text = defaultBeklemeSure.ToString() + ".0".ToString(); ;
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
                             break;
@@ -156,7 +229,7 @@ namespace ReceteMain.From_Controls
                             {
                                 //MessageBox.Show(minSureDK + " ile " + maxSureDK + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minSureDK} ile {maxSureDK} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
-                                textBox.Text = defaultSureDK.ToString();
+                                textBox.Text = defaultSureDK.ToString() + ".0".ToString(); ;
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
                             break;
@@ -166,7 +239,7 @@ namespace ReceteMain.From_Controls
                             {
                                 //MessageBox.Show(maxSicaklik + "'dan az bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {maxSicaklik}'dan az bir sayı giriniz.", textBox, 0, -30, 3000);
-                                textBox.Text = defaultSicaklik.ToString();
+                                textBox.Text = defaultSicaklik.ToString() + ".0".ToString(); ;
                                 textBox.Focus(); // Odaklanmayı geri getir
                             }
                             break;
@@ -176,7 +249,7 @@ namespace ReceteMain.From_Controls
                             { 
                                 //MessageBox.Show(minSabitMiktar + " ile " + maxSabitMiktar + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minSabitMiktar} ile {maxSabitMiktar} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
-                                textBox.Text = defaultMiktar.ToString();
+                                textBox.Text = defaultMiktar.ToString() + ".0".ToString(); ;
                                 textBox.Focus(); // Odaklanmayı geri getir
 
                             }
@@ -186,7 +259,7 @@ namespace ReceteMain.From_Controls
                             {
                                 //MessageBox.Show(minOranliYuk + " ile " + maxOranliYuk + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minOranliYuk} ile {maxOranliYuk} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
-                                textBox.Text = defaultOranliYuk.ToString();
+                                textBox.Text = defaultOranliYuk.ToString() + ".0".ToString(); ;
                                 textBox.Focus(); // Odaklanmayı geri getir
 
                             }
@@ -196,7 +269,7 @@ namespace ReceteMain.From_Controls
                             {
                                 //MessageBox.Show(minOranliMiktar + " ile " + maxOranliMiktar + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minOranliMiktar} ile {maxOranliMiktar} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
-                                textBox.Text = defaultOranliMiktar.ToString();
+                                textBox.Text = defaultOranliMiktar.ToString() + ".0".ToString(); ;
                                 textBox.Focus(); // Odaklanmayı geri getir
 
                             }
@@ -213,6 +286,33 @@ namespace ReceteMain.From_Controls
             }
 
 
+        }
+        private void txtBox_LostFocusTam(object sender, EventArgs e)
+        {
+            System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
+            if (textBox != null)
+            {
+
+                double value;
+
+                if (double.TryParse(textBox.Text, out value))
+                {
+
+                    switch (textBox.Name)
+                    {
+                        case "txtDevir":
+                            if (value < minDevir || value > maxDevir)
+                            {
+                                //MessageBox.Show(minDevir + " ile " + maxDevir + " arasında bir sayı giriniz.");
+                                toolTip2.Show($"Geçersiz değer! {minDevir} ile {maxDevir} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
+                                textBox.Text = defaultDevir.ToString();
+                                textBox.Focus(); // Odaklanmayı geri getir
+                            }
+                            break;
+                    }
+                }
+
+            }
         }
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {

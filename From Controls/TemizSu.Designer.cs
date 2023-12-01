@@ -38,7 +38,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSıcaklık = new System.Windows.Forms.TextBox();
@@ -70,9 +73,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtOranliMiktar = new System.Windows.Forms.TextBox();
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -86,7 +86,7 @@
             this.txtDevir.Size = new System.Drawing.Size(100, 30);
             this.txtDevir.TabIndex = 0;
             this.txtDevir.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
-            this.txtDevir.Leave += new System.EventHandler(this.txtBox_LostFocus);
+            this.txtDevir.Leave += new System.EventHandler(this.txtBox_LostFocusTam);
             // 
             // txtDonus
             // 
@@ -174,6 +174,16 @@
             this.panel1.Size = new System.Drawing.Size(502, 116);
             this.panel1.TabIndex = 43;
             // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox3.Location = new System.Drawing.Point(119, -157);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(88, 30);
+            this.textBox3.TabIndex = 62;
+            this.textBox3.Visible = false;
+            this.textBox3.Leave += new System.EventHandler(this.txtBox_LostFocus);
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -183,6 +193,25 @@
             this.label14.Size = new System.Drawing.Size(52, 25);
             this.label14.TabIndex = 25;
             this.label14.Text = "Rpm";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox2.Location = new System.Drawing.Point(245, -155);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(88, 30);
+            this.textBox2.TabIndex = 53;
+            this.textBox2.Visible = false;
+            this.textBox2.Leave += new System.EventHandler(this.txtBox_LostFocus);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox1.Location = new System.Drawing.Point(214, -274);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 30);
+            this.textBox1.TabIndex = 26;
+            this.textBox1.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // label5
             // 
@@ -241,6 +270,7 @@
             this.txtMiktar.Name = "txtMiktar";
             this.txtMiktar.Size = new System.Drawing.Size(88, 30);
             this.txtMiktar.TabIndex = 50;
+            this.txtMiktar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtMiktar.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // label17
@@ -494,42 +524,13 @@
             // txtOranliMiktar
             // 
             this.txtOranliMiktar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtOranliMiktar.Location = new System.Drawing.Point(319, 172);
+            this.txtOranliMiktar.Location = new System.Drawing.Point(320, 208);
             this.txtOranliMiktar.Name = "txtOranliMiktar";
             this.txtOranliMiktar.Size = new System.Drawing.Size(88, 30);
             this.txtOranliMiktar.TabIndex = 62;
             this.txtOranliMiktar.Visible = false;
             this.txtOranliMiktar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtOranliMiktar.Leave += new System.EventHandler(this.txtBox_LostFocus);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox1.Location = new System.Drawing.Point(214, -274);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 30);
-            this.textBox1.TabIndex = 26;
-            this.textBox1.Leave += new System.EventHandler(this.txtBox_LostFocus);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox2.Location = new System.Drawing.Point(245, -155);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(88, 30);
-            this.textBox2.TabIndex = 53;
-            this.textBox2.Visible = false;
-            this.textBox2.Leave += new System.EventHandler(this.txtBox_LostFocus);
-            // 
-            // textBox3
-            // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox3.Location = new System.Drawing.Point(119, -157);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(88, 30);
-            this.textBox3.TabIndex = 62;
-            this.textBox3.Visible = false;
-            this.textBox3.Leave += new System.EventHandler(this.txtBox_LostFocus);
             // 
             // TemizSu
             // 

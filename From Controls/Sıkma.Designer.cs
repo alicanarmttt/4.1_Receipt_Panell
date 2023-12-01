@@ -110,7 +110,7 @@
             this.txtDevir.Size = new System.Drawing.Size(100, 30);
             this.txtDevir.TabIndex = 0;
             this.txtDevir.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
-            this.txtDevir.Leave += new System.EventHandler(this.txtBox_LostFocus);
+            this.txtDevir.Leave += new System.EventHandler(this.txtBox_LostFocusTam);
             // 
             // txtDonus
             // 
