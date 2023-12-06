@@ -154,5 +154,10 @@ namespace ReceteMain
         {
             //Form2.statikIleriButon.Enabled = true;
         }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

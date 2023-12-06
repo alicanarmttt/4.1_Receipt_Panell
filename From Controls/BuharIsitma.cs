@@ -110,35 +110,36 @@ namespace ReceteMain.From_Controls
         {
             TextBox textBox = sender as TextBox;
             //Virgül varsa nasıl düzenleyeceğiz.
-
-            if (textBox.Text.Contains("."))
+            if (textBox != null)
             {
-                int index = textBox.Text.IndexOf(".");
-                //Eğer XY,0 -> XY,0
-                if (textBox.Text.EndsWith("0"))
+                if (textBox.Text.Contains("."))
                 {
-                    textBox.Text = textBox.Text;
+                    int index = textBox.Text.IndexOf(".");
+                    //Eğer XY,0 -> XY,0
+                    if (textBox.Text.EndsWith("0"))
+                    {
+                        textBox.Text = textBox.Text;
+                    }
+                    //Eğer XY, -> XY,0  
+                    if (textBox.Text.EndsWith("."))
+                    {
+                        textBox.Text = textBox.Text.ToString() + "0";
+                    }
+                    //Eğer XY,Z -> XY,Z
+                    if (char.IsDigit(textBox.Text[textBox.Text.Length - 1]))
+                    {
+                        textBox.Text = textBox.Text;
+                    }
+
                 }
-                //Eğer XY, -> XY,0  
-                if (textBox.Text.EndsWith("."))
+                //Eğer virgül yoksa nasıl düzenleyeceğiz.
+
+                else if (!textBox.Text.Contains("."))
                 {
-                    textBox.Text = textBox.Text.ToString() + "0";
-                }
-                //Eğer XY,Z -> XY,Z
-                if (char.IsDigit(textBox.Text[textBox.Text.Length - 1]))
-                {
-                    textBox.Text = textBox.Text;
+                    textBox.Text = textBox.Text.ToString() + ".0";
                 }
 
             }
-            //Eğer virgül yoksa nasıl düzenleyeceğiz.
-
-            else if(!textBox.Text.Contains("."))
-            {
-                textBox.Text = textBox.Text.ToString() + ".0";
-            }
-
-
             //Hangi textboxu doldurmayı bitirdiysek. Formatı harici min maxlarına göre sınırlarını kontrol etmeliyiz.
             //Tooltip ile de kullanıcıya bildirip default değerleri geri döndürüyoruz.
             if (textBox != null)

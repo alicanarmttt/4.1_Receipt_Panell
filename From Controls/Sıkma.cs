@@ -59,8 +59,8 @@ namespace ReceteMain.From_Controls
                 double defbekleme = (double)rd["defaultBeklemeSure"];
                 txtBekleme.Text = (defbekleme / 10.0).ToString();
 
-                double defsure = (double)rd["defaultSicaklik"];
-                txtSure.Text = (defsure / 10.0).ToString();
+                //double defsure = (double)rd["defaultSicaklik"];
+                //txtSure.Text = (defsure / 10.0).ToString();
 
                 //Texte eklenen defaultlarını döngü dışına çıkarabilmek için kaydettik.  
                 //Eğer geçersiz aralıkta ise defaultlarını kullanarak eski haline getireceğiz çünkü.

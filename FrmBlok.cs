@@ -146,5 +146,10 @@ namespace ReceteMain
         {
             frm2.UpdateButtonsEnabilityBlok(true);
         }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
