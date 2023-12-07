@@ -241,6 +241,7 @@
             this.txtSure.TabIndex = 34;
             this.txtSure.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.txtSure.Leave += new System.EventHandler(this.txtBox_LostFocus);
+            this.txtSure.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtSure_MouseDown);
             // 
             // radioDonusYok
             // 

@@ -76,8 +76,8 @@ namespace ReceteMain.From_Controls
                 double defsicaklik = (double)rd["defaultSicaklik"];
                 txtSıcaklık.Text = (defsicaklik / 10.0).ToString();
 
-                double defsure = (double)rd["defaultSicaklik"];
-                txtSure.Text = (defsure / 10.0).ToString();
+                double defsure = (double)rd["defaultSureDK"];
+                txtSure.Text = (defsure).ToString();
 
                 double defmiktar = (double)rd["defaultSicaklik"];
                 txtMiktar.Text = (defmiktar / 10.0).ToString();
@@ -180,7 +180,7 @@ namespace ReceteMain.From_Controls
                 }
             }
             //Eğer virgül yoksa
-            else if (!textBox.Text.Contains("."))
+            else if (!textBox.Text.Contains(".") && !string.IsNullOrWhiteSpace(textBox.Text))
             {
                 textBox.Text = textBox.Text.ToString() + ".0";
             }

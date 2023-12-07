@@ -59,8 +59,8 @@ namespace ReceteMain.From_Controls
                 double defbekleme = (double)rd["defaultBeklemeSure"];
                 txtBekleme.Text = (defbekleme / 10.0).ToString();
 
-                double defsure = (double)rd["defaultSicaklik"];
-                txtSure.Text = (defsure / 10.0).ToString();
+                double defsure = (double)rd["defaultSureDK"];
+                txtSure.Text = (defsure).ToString();
 
                 double defsicaklik = (double)rd["defaultSicaklik"];
                 txtSıcaklık.Text = (defsicaklik / 10.0).ToString();
@@ -80,7 +80,7 @@ namespace ReceteMain.From_Controls
                 {
                     txtDonus.Text += ".0";
                 }
-
+                    
                 if (!txtBekleme.Text.Contains("."))
                 {
                     txtBekleme.Text += ".0";
@@ -136,7 +136,7 @@ namespace ReceteMain.From_Controls
                 }
             }
             //Eğer virgül yoksa
-            else if (!textBox.Text.Contains("."))
+            else if (!textBox.Text.Contains(".") && !string.IsNullOrWhiteSpace(textBox.Text))
             {
                 textBox.Text = textBox.Text.ToString() + ".0";
             }
@@ -164,7 +164,7 @@ namespace ReceteMain.From_Controls
                         //    break;
 
                         case "txtDonus":
-                            if (value < minDonusSure || value > maxDonusSure)
+                            if (value < minDonusSure || value > maxDonusSure )
                             {
                                 //MessageBox.Show(minDonusSure + " ile " + maxDonusSure + " arasında bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {minDonusSure} ile {maxDonusSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -226,11 +226,10 @@ namespace ReceteMain.From_Controls
 
                 if (double.TryParse(textBox.Text, out value))
                 {
-
                     switch (textBox.Name)
                     {
                         case "txtDevir":
-                            if (value < minDevir || value > maxDevir)
+                            if (value < minDevir || value > maxDevir || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minDevir + " ile " + maxDevir + " arasında bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {minDevir} ile {maxDevir} arasında bir sayı giriniz.", textBox, 0, -30, 3000);

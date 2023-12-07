@@ -59,8 +59,8 @@ namespace ReceteMain.From_Controls
                 double defbekleme = (double)rd["defaultBeklemeSure"];
                 txtBekleme.Text = (defbekleme / 10.0).ToString();
 
-                //double defsure = (double)rd["defaultSicaklik"];
-                //txtSure.Text = (defsure / 10.0).ToString();
+                double defsure = (double)rd["defaultSureDK"];
+                txtSure.Text = (defsure).ToString();
 
                 //Texte eklenen defaultlarını döngü dışına çıkarabilmek için kaydettik.  
                 //Eğer geçersiz aralıkta ise defaultlarını kullanarak eski haline getireceğiz çünkü.
@@ -68,7 +68,7 @@ namespace ReceteMain.From_Controls
                 defaultDevir = int.Parse(txtDevir.Text);
                 defaultDonusSure = double.Parse(txtDonus.Text);
                 defaultBeklemeSure = double.Parse(txtBekleme.Text);
-                defaultSureDK = int.Parse(txtSure.Text);
+                defaultSureDK = double.Parse(txtSure.Text);
 
                 //Eğer 15 geldiyse textte .0 ekliyoruz.
                 if (!txtDonus.Text.Contains("."))
@@ -128,7 +128,7 @@ namespace ReceteMain.From_Controls
                 }
 
             //Eğer virgül yoksa
-            else if (!textBox.Text.Contains("."))
+            else if (!textBox.Text.Contains(".") && !string.IsNullOrWhiteSpace(textBox.Text))
             {
                 textBox.Text = textBox.Text.ToString() + ".0";
             }
@@ -245,6 +245,11 @@ namespace ReceteMain.From_Controls
             //Eğer tuş virgülse ve virgül metinde bulunuyorsa, ya da bir rakamsa ve virgül bulunuyorsa Sadece 1, basamak eklenebilsin.
             if (((e.KeyChar == '.') && (sender as System.Windows.Forms.TextBox).Text.Contains(".")) || (char.IsDigit(e.KeyChar) && (sender as System.Windows.Forms.TextBox).Text.Contains(".")))
             {
+                if (isTextSelected)
+                {
+                    // Eğer metin seçiliyse, KeyPress olayındaki işlemleri yapma
+                    return;
+                }
                 int index = (sender as System.Windows.Forms.TextBox).Text.IndexOf(".");
                 if (((sender as System.Windows.Forms.TextBox).Text.Length - 1) - index >= 1)
                 {
@@ -261,6 +266,16 @@ namespace ReceteMain.From_Controls
             else
             {
                 panel1.Visible = true;
+            }
+        }
+        private bool isTextSelected = false;
+        private void txtSure_MouseDown(object sender, MouseEventArgs e)
+        {
+            System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
+
+            if (textBox != null && textBox.SelectionLength > 0)
+            {
+                isTextSelected = true;
             }
         }
     }

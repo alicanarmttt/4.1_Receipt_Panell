@@ -128,7 +128,7 @@ namespace ReceteMain.From_Controls
                 }
                 //Eğer virgül yoksa nasıl düzenleyeceğiz.
 
-                else if (!textBox.Text.Contains("."))
+                else if (!textBox.Text.Contains(".") && !string.IsNullOrWhiteSpace(textBox.Text))
                 {
                     textBox.Text = textBox.Text.ToString() + ".0";
                 }
@@ -157,7 +157,7 @@ namespace ReceteMain.From_Controls
                         //    break;
 
                         case "txtDonus":
-                            if (value < minDonusSure || value > maxDonusSure)
+                            if (value < minDonusSure || value > maxDonusSure || string.IsNullOrWhiteSpace(textBox.Text))
                             {
                                 //MessageBox.Show(minDonusSure + " ile " + maxDonusSure + " arasında bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {minDonusSure} ile {maxDonusSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -167,7 +167,7 @@ namespace ReceteMain.From_Controls
                             break;
 
                         case "txtBekleme":
-                            if (value < minBeklemeSure || value > maxBeklemeSure)
+                            if (value < minBeklemeSure || value > maxBeklemeSure || string.IsNullOrWhiteSpace(textBox.Text))
                             {
                                 //MessageBox.Show(minBeklemeSure + " ile " + maxBeklemeSure + " arasında bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {minBeklemeSure} ile {maxBeklemeSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -177,7 +177,7 @@ namespace ReceteMain.From_Controls
                             break;
 
                         case "txtSıcaklık":
-                            if (value > maxSicaklik)
+                            if (value > maxSicaklik || string.IsNullOrWhiteSpace(textBox.Text))
                             {
                                 //MessageBox.Show(maxSicaklik + "'dan az bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {maxSicaklik} değerinin üstüne bir sayı girmeyiniz", textBox, 0, -30, 3000);
@@ -208,7 +208,7 @@ namespace ReceteMain.From_Controls
 
                 double value;
 
-                if (double.TryParse(textBox.Text, out value))
+                if (double.TryParse(textBox.Text, out value) || string.IsNullOrWhiteSpace(textBox.Text))
                 {
 
                     switch (textBox.Name)
