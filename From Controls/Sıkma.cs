@@ -139,7 +139,7 @@ namespace ReceteMain.From_Controls
             {
                 double value;
 
-                if (double.TryParse(textBox.Text, out value))
+                if (double.TryParse(textBox.Text, out value) || string.IsNullOrEmpty(textBox.Text))
                 {
                     // TextBox'tan alınan değer başarıyla bir decimal değere dönüştürüldü
 
@@ -156,7 +156,7 @@ namespace ReceteMain.From_Controls
                         //    break;
 
                         case "txtDonus":
-                            if (value < minDonusSure || value > maxDonusSure)
+                            if (value < minDonusSure || value > maxDonusSure || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minDonusSure + " ile " + maxDonusSure + " arasında bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {minDonusSure} ile {maxDonusSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -167,7 +167,7 @@ namespace ReceteMain.From_Controls
                             break;
 
                         case "txtBekleme":
-                            if (value < minBeklemeSure || value > maxBeklemeSure)
+                            if (value < minBeklemeSure || value > maxBeklemeSure || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minBeklemeSure + " ile " + maxBeklemeSure + " arasında bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {minBeklemeSure} ile {maxBeklemeSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -177,7 +177,7 @@ namespace ReceteMain.From_Controls
                             break;
 
                         case "txtSure":
-                            if (value < minSureDK || value > maxSureDK)
+                            if (value < minSureDK || value > maxSureDK || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minSureDK + " ile " + maxSureDK + " arasında bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {minSureDK} ile {maxSureDK} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -206,13 +206,13 @@ namespace ReceteMain.From_Controls
 
                 double value;
 
-                if (double.TryParse(textBox.Text, out value))
+                if (double.TryParse(textBox.Text, out value) || string.IsNullOrEmpty(textBox.Text))
                 {
 
                     switch (textBox.Name)
                     {
                         case "txtDevir":
-                            if (value < minDevir || value > maxDevir)
+                            if (value < minDevir || value > maxDevir || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minDevir + " ile " + maxDevir + " arasında bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {minDevir} ile {maxDevir} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -245,11 +245,7 @@ namespace ReceteMain.From_Controls
             //Eğer tuş virgülse ve virgül metinde bulunuyorsa, ya da bir rakamsa ve virgül bulunuyorsa Sadece 1, basamak eklenebilsin.
             if (((e.KeyChar == '.') && (sender as System.Windows.Forms.TextBox).Text.Contains(".")) || (char.IsDigit(e.KeyChar) && (sender as System.Windows.Forms.TextBox).Text.Contains(".")))
             {
-                if (isTextSelected)
-                {
-                    // Eğer metin seçiliyse, KeyPress olayındaki işlemleri yapma
-                    return;
-                }
+               
                 int index = (sender as System.Windows.Forms.TextBox).Text.IndexOf(".");
                 if (((sender as System.Windows.Forms.TextBox).Text.Length - 1) - index >= 1)
                 {
@@ -271,12 +267,7 @@ namespace ReceteMain.From_Controls
         private bool isTextSelected = false;
         private void txtSure_MouseDown(object sender, MouseEventArgs e)
         {
-            System.Windows.Forms.TextBox textBox = sender as System.Windows.Forms.TextBox;
-
-            if (textBox != null && textBox.SelectionLength > 0)
-            {
-                isTextSelected = true;
-            }
+            
         }
     }
 

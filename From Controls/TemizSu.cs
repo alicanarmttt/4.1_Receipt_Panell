@@ -190,7 +190,7 @@ namespace ReceteMain.From_Controls
             {
                 double value;
 
-                if (double.TryParse(textBox.Text, out value))
+                if (double.TryParse(textBox.Text, out value) || string.IsNullOrEmpty(textBox.Text))
                 {
                     // TextBox'tan alınan değer başarıyla bir decimal değere dönüştürüldü
 
@@ -207,7 +207,7 @@ namespace ReceteMain.From_Controls
                         //    break;
 
                         case "txtDonus":
-                            if (value < minDonusSure || value > maxDonusSure)
+                            if (value < minDonusSure || value > maxDonusSure || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minDonusSure + " ile " + maxDonusSure + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minDonusSure} ile {maxDonusSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -218,7 +218,7 @@ namespace ReceteMain.From_Controls
                             break;
 
                         case "txtBekleme":
-                            if (value < minBeklemeSure || value > maxBeklemeSure)
+                            if (value < minBeklemeSure || value > maxBeklemeSure || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minBeklemeSure + " ile " + maxBeklemeSure + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minBeklemeSure} ile {maxBeklemeSure} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -228,7 +228,7 @@ namespace ReceteMain.From_Controls
                             break;
 
                         case "txtSure":
-                            if (value < minSureDK || value > maxSureDK)
+                            if (value < minSureDK || value > maxSureDK || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minSureDK + " ile " + maxSureDK + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minSureDK} ile {maxSureDK} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -238,7 +238,7 @@ namespace ReceteMain.From_Controls
                             break;
 
                         case "txtSıcaklık":
-                            if (value > maxSicaklik)
+                            if (value > maxSicaklik || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(maxSicaklik + "'dan az bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {maxSicaklik}'dan az bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -248,7 +248,7 @@ namespace ReceteMain.From_Controls
                             break;
 
                         case "txtMiktar":
-                            if(value>maxSabitMiktar || value < minSabitMiktar)
+                            if(value>maxSabitMiktar || value < minSabitMiktar || string.IsNullOrEmpty(textBox.Text))
                             { 
                                 //MessageBox.Show(minSabitMiktar + " ile " + maxSabitMiktar + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minSabitMiktar} ile {maxSabitMiktar} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -258,7 +258,7 @@ namespace ReceteMain.From_Controls
                             }
                             break;
                         case "txtYuk":
-                            if (value > maxSabitMiktar || value < minSabitMiktar)
+                            if (value > maxSabitMiktar || value < minSabitMiktar || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minOranliYuk + " ile " + maxOranliYuk + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minOranliYuk} ile {maxOranliYuk} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -268,7 +268,7 @@ namespace ReceteMain.From_Controls
                             }
                             break;
                         case "txtOranliMiktar":
-                            if (value > maxOranliMiktar || value < minOranliMiktar)
+                            if (value > maxOranliMiktar || value < minOranliMiktar || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minOranliMiktar + " ile " + maxOranliMiktar + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minOranliMiktar} ile {maxOranliMiktar} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
@@ -305,7 +305,7 @@ namespace ReceteMain.From_Controls
                     switch (textBox.Name)
                     {
                         case "txtDevir":
-                            if (value < minDevir || value > maxDevir)
+                            if (value < minDevir || value > maxDevir || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minDevir + " ile " + maxDevir + " arasında bir sayı giriniz.");
                                 toolTip2.Show($"Geçersiz değer! {minDevir} ile {maxDevir} arasında bir sayı giriniz.", textBox, 0, -30, 3000);

@@ -141,7 +141,7 @@ namespace ReceteMain.From_Controls
 
                 double value;
 
-                if (double.TryParse(textBox.Text, out value))
+                if (double.TryParse(textBox.Text, out value) || string.IsNullOrEmpty(textBox.Text))
                 {
                     
                     switch (textBox.Name)
@@ -214,7 +214,7 @@ namespace ReceteMain.From_Controls
                     switch (textBox.Name)
                     {
                         case "txtDevir":
-                            if (value < minDevir || value > maxDevir)
+                            if (value < minDevir || value > maxDevir || string.IsNullOrEmpty(textBox.Text))
                             {
                                 //MessageBox.Show(minDevir + " ile " + maxDevir + " arasında bir sayı giriniz.");
                                 toolTip1.Show($"Geçersiz değer! {minDevir} ile {maxDevir} arasında bir sayı giriniz.", textBox, 0, -30, 3000);
