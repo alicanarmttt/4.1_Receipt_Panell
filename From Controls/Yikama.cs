@@ -124,22 +124,16 @@ namespace ReceteMain.From_Controls
             if (textBox.Text.Contains("."))
             {
                 int index = textBox.Text.IndexOf(".");
-                //Eğer XY,0 -> XY,0
-                if (textBox.Text.EndsWith("0"))
+                //Eğer XY,0 -> XY,0  ya da //Eğer XY,Z -> XY,Z
+                if (textBox.Text.EndsWith("0") || char.IsDigit(textBox.Text[textBox.Text.Length - 1]))
                 {
                     textBox.Text = textBox.Text;
                 }
-                //Eğer XY, -> XY,0
+                //Eğer XY, -> XY,0  
                 if (textBox.Text.EndsWith("."))
                 {
                     textBox.Text = textBox.Text.ToString() + "0";
                 }
-                //Eğer XY,Z -> XY,Z
-                if (char.IsDigit(textBox.Text[textBox.Text.Length - 1]))
-                {
-                    textBox.Text = textBox.Text;
-                }
-
             }
             //Eğer virgül yoksa
             else if (!textBox.Text.Contains("."))

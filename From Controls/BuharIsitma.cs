@@ -115,8 +115,8 @@ namespace ReceteMain.From_Controls
                 if (textBox.Text.Contains("."))
                 {
                     int index = textBox.Text.IndexOf(".");
-                    //Eğer XY,0 -> XY,0
-                    if (textBox.Text.EndsWith("0"))
+                    //Eğer XY,0 -> XY,0  ya da //Eğer XY,Z -> XY,Z
+                    if (textBox.Text.EndsWith("0") || char.IsDigit(textBox.Text[textBox.Text.Length - 1]))
                     {
                         textBox.Text = textBox.Text;
                     }
@@ -125,12 +125,6 @@ namespace ReceteMain.From_Controls
                     {
                         textBox.Text = textBox.Text.ToString() + "0";
                     }
-                    //Eğer XY,Z -> XY,Z
-                    if (char.IsDigit(textBox.Text[textBox.Text.Length - 1]))
-                    {
-                        textBox.Text = textBox.Text;
-                    }
-
                 }
                 //Eğer virgül yoksa nasıl düzenleyeceğiz.
 
@@ -233,6 +227,7 @@ namespace ReceteMain.From_Controls
 
             }
         }
+
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             //silme işlemi çalışabilsin.
@@ -249,9 +244,11 @@ namespace ReceteMain.From_Controls
                 e.Handled = true;
                 return;
             }
+            
             //Eğer tuş virgülse ve virgül metinde bulunuyorsa, ya da bir rakamsa ve virgül bulunuyorsa Sadece 1, basamak eklenebilsin.
             if (((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) || (char.IsDigit(e.KeyChar) && (sender as TextBox).Text.Contains(".")))
             {
+                
                 int index = (sender as TextBox).Text.IndexOf(".");
                 if (((sender as TextBox).Text.Length-1) - index >= 1)
                 {
